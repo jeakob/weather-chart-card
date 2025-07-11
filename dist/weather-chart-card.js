@@ -18696,7 +18696,7 @@ updateChart({ forecasts, forecastChart } = this) {
 	        bottom: 1px;
         }
         .wind-speed {
-          font-size: 11px;
+          font-size: 16px;
           margin-right: 1px;
           margin-inline-start: initial;
           margin-inline-end: 1px;
