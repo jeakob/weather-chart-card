@@ -1598,7 +1598,7 @@ class WeatherChartCardEditor extends s {
               <ha-textfield
                 label="Labels Font Size"
                 type="number"
-                .value="${forecastConfig.labels_font_size || '11'}"
+                .value="${forecastConfig.labels_font_size || '16'}"
                 @change="${(e) => this._valueChanged(e, 'forecast.labels_font_size')}"
               ></ha-textfield>
               </div>
