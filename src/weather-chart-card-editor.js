@@ -38,6 +38,7 @@ class WeatherChartCardEditor extends LitElement {
       throw new Error("Invalid configuration");
     }
     this._config = config;
+    this._config.forecast = this._config.forecast || {};
     this._entity = config.entity || '';
     this.hasApparentTemperature = (
       this.hass &&

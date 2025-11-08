@@ -638,7 +638,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
               color: config.forecast.chart_datetime_color || textColor,
               padding: config.forecast.precipitation_type === 'rainfall' && config.forecast.show_probability && config.forecast.type !== 'hourly' ? 4 : 10,
               font: {
-                size: 16,
+                size: parseInt(config.forecast.labels_font_size),
               },
               callback: function (value, index, values) {
                   var datetime = this.getLabelForValue(value);
