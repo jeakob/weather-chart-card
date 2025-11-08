@@ -52,7 +52,7 @@ static getStubConfig(hass, unusedEntities, allEntities) {
     forecast: {
       precipitation_type: 'rainfall',
       show_probability: false,
-      labels_font_size: '11',
+      labels_font_size: '14',
       precip_bar_size: '100',
       style: 'style1',
       show_wind_forecast: true,
@@ -101,7 +101,7 @@ setConfig(config) {
     forecast: {
       precipitation_type: 'rainfall',
       show_probability: false,
-      labels_font_size: 11,
+      labels_font_size: 14,
       chart_height: 180,
       precip_bar_size: 100,
       style: 'style1',
