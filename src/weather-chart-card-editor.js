@@ -743,6 +743,12 @@ class WeatherChartCardEditor extends LitElement {
                 .value="${forecastConfig.chart_text_size || '14'}"
                 @change="${(e) => this._valueChanged(e, 'forecast.chart_text_size')}"
               ></ha-textfield>
+              <ha-textfield
+                label="Chart Ticks Text Size"
+                type="number"
+                .value="${forecastConfig.chart_ticks_text_size || '14'}"
+                @change="${(e) => this._valueChanged(e, 'forecast.chart_ticks_text_size')}"
+              ></ha-textfield>
               </div>
 	    <div class="flex-container">
               <ha-textfield
