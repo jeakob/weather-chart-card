@@ -608,6 +608,8 @@ drawChart({ config, language, weather, forecastItems } = this) {
     };
   }
 
+  console.log('labels_font_size:', config.forecast.labels_font_size);
+
   this.forecastChart = new Chart(ctx, {
     type: 'bar',
     data: {
