@@ -900,8 +900,7 @@ class WeatherChartCardEditor extends s {
     if (!config) {
       throw new Error("Invalid configuration");
     }
-    this._config = config;
-    this._config.forecast = this._config.forecast || {};
+    this._config = { ...config, forecast: { ...(config.forecast || {}) } };
     this._entity = config.entity || '';
     this.hasApparentTemperature = (
       this.hass &&
@@ -1044,8 +1043,11 @@ class WeatherChartCardEditor extends s {
   }
 
   _handlePrecipitationTypeChange(e) {
-    const newValue = e.target.value;
-    this.config.forecast.precipitation_type = newValue;
+    if (!this._config) return;
+    const newConfig = JSON.parse(JSON.stringify(this._config));
+    newConfig.forecast.precipitation_type = e.target.value;
+    this.configChanged(newConfig);
+    this.requestUpdate();
   }
 
   _formValueChanged(event) {
