@@ -619,6 +619,30 @@ class WeatherChartCardEditor extends LitElement {
             .value="${this._config.current_temp_size || '28'}"
             @change="${(e) => this._valueChanged(e, 'current_temp_size')}"
           ></ha-textfield>
+          <ha-textfield
+            label="Condition Text Size"
+            type="number"
+            .value="${this._config.condition_text_size || '18'}"
+            @change="${(e) => this._valueChanged(e, 'condition_text_size')}"
+          ></ha-textfield>
+          <ha-textfield
+            label="Feels Like Text Size"
+            type="number"
+            .value="${this._config.feels_like_text_size || '13'}"
+            @change="${(e) => this._valueChanged(e, 'feels_like_text_size')}"
+          ></ha-textfield>
+          <ha-textfield
+            label="Description Text Size"
+            type="number"
+            .value="${this._config.description_text_size || '13'}"
+            @change="${(e) => this._valueChanged(e, 'description_text_size')}"
+          ></ha-textfield>
+          <ha-textfield
+            label="Attributes Text Size"
+            type="number"
+            .value="${this._config.attributes_text_size || '14'}"
+            @change="${(e) => this._valueChanged(e, 'attributes_text_size')}"
+          ></ha-textfield>
         <ha-textfield
           label="Custom icon path"
           .value="${this._config.icons || ''}"
@@ -658,6 +682,15 @@ class WeatherChartCardEditor extends LitElement {
 	   <ha-list-item .value=${'uk'}>Ukrainian</ha-list-item>
     	   <ha-list-item .value=${'ko'}>한국어</ha-list-item>
         </ha-select>
+        </div>
+        <div class="switch-container">
+          <ha-switch
+            @change="${(e) => this._valueChanged(e, 'eink_mode')}"
+            .checked="${this._config.eink_mode === true}"
+          ></ha-switch>
+          <label class="switch-label">
+            E-Ink Display Mode (high contrast, bold text, no animations)
+          </label>
         </div>
       </div>
 

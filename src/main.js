@@ -49,6 +49,7 @@ static getStubConfig(hass, unusedEntities, allEntities) {
     animated_icons: false,
     icon_style: 'style1',
     autoscroll: false,
+    eink_mode: false,
     forecast: {
       precipitation_type: 'rainfall',
       show_probability: false,
@@ -61,8 +62,8 @@ static getStubConfig(hass, unusedEntities, allEntities) {
       condition_icons: true,
       round_temp: false,
       type: 'daily',
-      number_of_forecasts: '0', 
-      disable_animation: false, 
+      number_of_forecasts: '0',
+      disable_animation: false,
     },
   };
 }
@@ -91,8 +92,13 @@ setConfig(config) {
     animated_icons: false,
     icon_style: 'style1',
     current_temp_size: 28,
+    condition_text_size: 18,
+    feels_like_text_size: 13,
+    description_text_size: 13,
+    attributes_text_size: 14,
     time_size: 26,
     day_date_size: 15,
+    eink_mode: false,
     show_feels_like: false,
     show_dew_point: false,
     show_wind_gust_speed: false,
@@ -127,6 +133,11 @@ setConfig(config) {
   };
 
   cardConfig.units.speed = config.speed ? config.speed : cardConfig.units.speed;
+
+  // E-ink mode: force disable animations for better rendering
+  if (cardConfig.eink_mode) {
+    cardConfig.forecast.disable_animation = true;
+  }
 
   this.baseIconPath = cardConfig.icon_style === 'style2' ?
     'https://cdn.jsdelivr.net/gh/mlamberts78/weather-chart-card/dist/icons2/':
@@ -481,9 +492,9 @@ drawChart({ config, language, weather, forecastItems } = this) {
   const data = this.computeForecastData();
 
   var style = getComputedStyle(document.body);
-  var backgroundColor = style.getPropertyValue('--card-background-color');
-  var textColor = style.getPropertyValue('--primary-text-color');
-  var dividerColor = style.getPropertyValue('--divider-color');
+  var backgroundColor = config.eink_mode ? 'white' : style.getPropertyValue('--card-background-color');
+  var textColor = config.eink_mode ? 'black' : style.getPropertyValue('--primary-text-color');
+  var dividerColor = config.eink_mode ? '#ccc' : style.getPropertyValue('--divider-color');
   const canvas = this.renderRoot.querySelector('#forecastChart');
   if (!canvas) {
     requestAnimationFrame(() => this.drawChart());
@@ -508,8 +519,8 @@ drawChart({ config, language, weather, forecastItems } = this) {
   Chart.defaults.scale.grid.color = dividerColor;
   Chart.defaults.elements.line.fill = false;
   Chart.defaults.elements.line.tension = 0.3;
-  Chart.defaults.elements.line.borderWidth = 1.5;
-  Chart.defaults.elements.point.radius = 2;
+  Chart.defaults.elements.line.borderWidth = config.eink_mode ? 3 : 1.5;
+  Chart.defaults.elements.point.radius = config.eink_mode ? 4 : 2;
   Chart.defaults.elements.point.hitRadius = 10;
 
   var datasets = [
@@ -589,6 +600,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       color: chart_text_color || config.forecast.temperature1_color,
       font: {
         size: parseInt(config.forecast.labels_font_size) + 1,
+        weight: config.eink_mode ? 'bold' : 'normal',
         lineHeight: 0.7,
       },
     };
@@ -607,6 +619,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       color: chart_text_color || config.forecast.temperature2_color,
       font: {
         size: parseInt(config.forecast.labels_font_size) + 1,
+        weight: config.eink_mode ? 'bold' : 'normal',
         lineHeight: 0.7,
       },
     };
@@ -643,6 +656,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
               padding: config.forecast.precipitation_type === 'rainfall' && config.forecast.show_probability && config.forecast.type !== 'hourly' ? 4 : 10,
               font: {
                 size: parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size),
+                weight: config.eink_mode ? 'bold' : 'normal',
               },
               callback: function (value, index, values) {
                   var datetime = this.getLabelForValue(value);
@@ -715,6 +729,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
           color: chart_text_color || textColor,
           font: {
             size: config.forecast.labels_font_size,
+            weight: config.eink_mode ? 'bold' : 'normal',
             lineHeight: 0.7,
           },
           formatter: function (value, context) {
@@ -874,7 +889,7 @@ updateChart({ forecasts, forecastChart } = this) {
           line-height: 0.9;
         }
         .main span {
-          font-size: 18px;
+          font-size: ${config.condition_text_size}px;
           color: var(--secondary-text-color);
         }
         .attributes {
@@ -882,7 +897,8 @@ updateChart({ forecasts, forecastChart } = this) {
           justify-content: space-between;
           align-items: center;
           margin-bottom: 6px;
-      	  font-weight: 300;
+      	  font-weight: ${config.eink_mode ? '400' : '300'};
+          font-size: ${config.attributes_text_size}px;
           direction: ltr;
         }
         .chart-container {
@@ -953,13 +969,13 @@ updateChart({ forecasts, forecastChart } = this) {
           color: var(--secondary-text-color);
         }
         .main .feels-like {
-          font-size: 13px;
+          font-size: ${config.feels_like_text_size}px;
           margin-top: 5px;
           font-weight: 400;
         }
         .main .description {
 	  font-style: italic;
-          font-size: 13px;
+          font-size: ${config.description_text_size}px;
           margin-top: 5px;
           font-weight: 400;
         }
@@ -969,6 +985,45 @@ updateChart({ forecasts, forecastChart } = this) {
           font-weight: 300;
           margin-bottom: 1px;
         }
+        ${config.eink_mode ? `
+        ha-card {
+          background: white !important;
+          color: black !important;
+          --primary-text-color: black;
+          --secondary-text-color: #333;
+          --paper-item-icon-color: black;
+        }
+        .main {
+          font-weight: 700;
+        }
+        .main span {
+          color: #333 !important;
+          font-weight: 600;
+        }
+        .main .feels-like,
+        .main .description {
+          font-weight: 500;
+        }
+        .attributes {
+          font-weight: 400 !important;
+        }
+        .attributes ha-icon {
+          color: black !important;
+        }
+        .wind-details {
+          font-weight: 400;
+        }
+        .wind-speed, .wind-unit {
+          font-size: ${Math.max(parseInt(config.attributes_text_size) - 3, 9)}px !important;
+        }
+        .date-text {
+          color: #333 !important;
+          font-weight: 500;
+        }
+        .current-time {
+          font-weight: 600;
+        }
+        ` : ''}
       </style>
 
       <ha-card header="${config.title}">
