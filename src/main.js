@@ -49,6 +49,9 @@ static getStubConfig(hass, unusedEntities, allEntities) {
     animated_icons: false,
     icon_style: 'style1',
     autoscroll: false,
+    wind_speed_text_size: 11,
+    wind_unit_text_size: 9,
+    last_updated_text_size: 13,
     eink_mode: false,
     forecast: {
       precipitation_type: 'rainfall',
@@ -56,6 +59,9 @@ static getStubConfig(hass, unusedEntities, allEntities) {
       labels_font_size: '25',
       chart_text_size: '14',
       chart_ticks_text_size: '24',
+      chart_line_width: '1.5',
+      chart_point_radius: '2',
+      condition_icon_size: '25',
       precip_bar_size: '100',
       style: 'style1',
       show_wind_forecast: true,
@@ -98,6 +104,9 @@ setConfig(config) {
     attributes_text_size: 14,
     time_size: 26,
     day_date_size: 15,
+    wind_speed_text_size: 11,
+    wind_unit_text_size: 9,
+    last_updated_text_size: 13,
     eink_mode: false,
     show_feels_like: false,
     show_dew_point: false,
@@ -113,6 +122,9 @@ setConfig(config) {
       chart_text_size: 14,
       chart_ticks_text_size: 14,
       chart_height: 180,
+      chart_line_width: 1.5,
+      chart_point_radius: 2,
+      condition_icon_size: 25,
       precip_bar_size: 100,
       style: 'style1',
       temperature1_color: 'rgba(255, 152, 0, 1.0)',
@@ -134,9 +146,25 @@ setConfig(config) {
 
   cardConfig.units.speed = config.speed ? config.speed : cardConfig.units.speed;
 
-  // E-ink mode: force disable animations for better rendering
+  // E-ink mode: force disable animations and apply larger defaults for e-ink displays
   if (cardConfig.eink_mode) {
     cardConfig.forecast.disable_animation = true;
+    // Only override if user hasn't explicitly set values in config
+    if (!config.current_temp_size) cardConfig.current_temp_size = 42;
+    if (!config.condition_text_size) cardConfig.condition_text_size = 26;
+    if (!config.feels_like_text_size) cardConfig.feels_like_text_size = 18;
+    if (!config.description_text_size) cardConfig.description_text_size = 18;
+    if (!config.attributes_text_size) cardConfig.attributes_text_size = 20;
+    if (!config.wind_speed_text_size) cardConfig.wind_speed_text_size = 16;
+    if (!config.wind_unit_text_size) cardConfig.wind_unit_text_size = 13;
+    if (!config.last_updated_text_size) cardConfig.last_updated_text_size = 16;
+    if (!config.forecast || !config.forecast.labels_font_size) cardConfig.forecast.labels_font_size = 20;
+    if (!config.forecast || !config.forecast.chart_text_size) cardConfig.forecast.chart_text_size = 20;
+    if (!config.forecast || !config.forecast.chart_ticks_text_size) cardConfig.forecast.chart_ticks_text_size = 20;
+    if (!config.forecast || !config.forecast.chart_height) cardConfig.forecast.chart_height = 280;
+    if (!config.forecast || !config.forecast.chart_line_width) cardConfig.forecast.chart_line_width = 3;
+    if (!config.forecast || !config.forecast.chart_point_radius) cardConfig.forecast.chart_point_radius = 4;
+    if (!config.forecast || !config.forecast.condition_icon_size) cardConfig.forecast.condition_icon_size = 35;
   }
 
   this.baseIconPath = cardConfig.icon_style === 'style2' ?
@@ -519,8 +547,8 @@ drawChart({ config, language, weather, forecastItems } = this) {
   Chart.defaults.scale.grid.color = dividerColor;
   Chart.defaults.elements.line.fill = false;
   Chart.defaults.elements.line.tension = 0.3;
-  Chart.defaults.elements.line.borderWidth = config.eink_mode ? 3 : 1.5;
-  Chart.defaults.elements.point.radius = config.eink_mode ? 4 : 2;
+  Chart.defaults.elements.line.borderWidth = parseFloat(config.forecast.chart_line_width);
+  Chart.defaults.elements.point.radius = parseFloat(config.forecast.chart_point_radius);
   Chart.defaults.elements.point.hitRadius = 10;
 
   var datasets = [
@@ -920,6 +948,13 @@ updateChart({ forecasts, forecastChart } = this) {
           align-items: center;
           margin: 1px;
         }
+        .forecast-item img {
+          width: ${config.forecast.condition_icon_size}px;
+          height: ${config.forecast.condition_icon_size}px;
+        }
+        .forecast-item ha-icon {
+          --mdc-icon-size: ${config.forecast.condition_icon_size}px;
+        }
         .wind-details {
           display: flex;
           justify-content: space-around;
@@ -945,13 +980,13 @@ updateChart({ forecasts, forecastChart } = this) {
 	        bottom: 1px;
         }
         .wind-speed {
-          font-size: 11px;
+          font-size: ${config.wind_speed_text_size}px;
           margin-right: 1px;
           margin-inline-start: initial;
           margin-inline-end: 1px;
         }
         .wind-unit {
-          font-size: 9px;
+          font-size: ${config.wind_unit_text_size}px;
           margin-left: 1px;
           margin-inline-start: 1px;
           margin-inline-end: initial;
@@ -980,7 +1015,7 @@ updateChart({ forecasts, forecastChart } = this) {
           font-weight: 400;
         }
         .updated {
-          font-size: 13px;
+          font-size: ${config.last_updated_text_size}px;
           align-items: right;
           font-weight: 300;
           margin-bottom: 1px;
@@ -1013,8 +1048,11 @@ updateChart({ forecasts, forecastChart } = this) {
         .wind-details {
           font-weight: 400;
         }
-        .wind-speed, .wind-unit {
-          font-size: ${Math.max(parseInt(config.attributes_text_size) - 3, 9)}px !important;
+        .wind-speed {
+          font-size: ${config.wind_speed_text_size}px !important;
+        }
+        .wind-unit {
+          font-size: ${config.wind_unit_text_size}px !important;
         }
         .date-text {
           color: #333 !important;

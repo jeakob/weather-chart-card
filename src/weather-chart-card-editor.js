@@ -643,6 +643,24 @@ class WeatherChartCardEditor extends LitElement {
             .value="${this._config.attributes_text_size || '14'}"
             @change="${(e) => this._valueChanged(e, 'attributes_text_size')}"
           ></ha-textfield>
+          <ha-textfield
+            label="Wind Speed Text Size"
+            type="number"
+            .value="${this._config.wind_speed_text_size || '11'}"
+            @change="${(e) => this._valueChanged(e, 'wind_speed_text_size')}"
+          ></ha-textfield>
+          <ha-textfield
+            label="Wind Unit Text Size"
+            type="number"
+            .value="${this._config.wind_unit_text_size || '9'}"
+            @change="${(e) => this._valueChanged(e, 'wind_unit_text_size')}"
+          ></ha-textfield>
+          <ha-textfield
+            label="Last Updated Text Size"
+            type="number"
+            .value="${this._config.last_updated_text_size || '13'}"
+            @change="${(e) => this._valueChanged(e, 'last_updated_text_size')}"
+          ></ha-textfield>
         <ha-textfield
           label="Custom icon path"
           .value="${this._config.icons || ''}"
@@ -795,6 +813,28 @@ class WeatherChartCardEditor extends LitElement {
                 type="number"
                 .value="${forecastConfig.number_of_forecasts || '0'}"
                 @change="${(e) => this._valueChanged(e, 'forecast.number_of_forecasts')}"
+              ></ha-textfield>
+              </div>
+            <div class="flex-container">
+              <ha-textfield
+                label="Chart Line Width"
+                type="number"
+                step="0.5"
+                .value="${forecastConfig.chart_line_width || '1.5'}"
+                @change="${(e) => this._valueChanged(e, 'forecast.chart_line_width')}"
+              ></ha-textfield>
+              <ha-textfield
+                label="Chart Point Radius"
+                type="number"
+                step="0.5"
+                .value="${forecastConfig.chart_point_radius || '2'}"
+                @change="${(e) => this._valueChanged(e, 'forecast.chart_point_radius')}"
+              ></ha-textfield>
+              <ha-textfield
+                label="Condition Icon Size"
+                type="number"
+                .value="${forecastConfig.condition_icon_size || '25'}"
+                @change="${(e) => this._valueChanged(e, 'forecast.condition_icon_size')}"
               ></ha-textfield>
               </div>
             </div>
