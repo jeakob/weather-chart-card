@@ -1674,6 +1674,13 @@ class WeatherChartCardEditor extends s {
                 @change="${(e) => this._valueChanged(e, 'forecast.chart_height')}"
               ></ha-textfield>
               <ha-textfield
+                label="Extra height when raining (px)"
+                type="number"
+                min="0"
+                .value="${forecastConfig.precip_expand_height || '0'}"
+                @change="${(e) => this._valueChanged(e, 'forecast.precip_expand_height')}"
+              ></ha-textfield>
+              <ha-textfield
                 label="Number of forecasts"
                 type="number"
                 .value="${forecastConfig.number_of_forecasts || '0'}"
@@ -18157,6 +18164,7 @@ setConfig(config) {
       chart_text_size: 14,
       chart_ticks_text_size: 14,
       chart_height: 180,
+      precip_expand_height: 0,
       chart_line_width: 1.5,
       chart_point_radius: 2,
       condition_icon_size: 25,
@@ -18554,6 +18562,17 @@ drawChart({ config, language, weather, forecastItems } = this) {
   }
   const data = this.computeForecastData();
 
+  // Expand chart height when precipitation is present
+  const precipExpandHeight = parseInt(config.forecast.precip_expand_height) || 0;
+  const hasPrecip = precipExpandHeight > 0 && data.precip && data.precip.some(v => v > 0);
+  const chartContainer = this.renderRoot.querySelector('.chart-container');
+  if (chartContainer) {
+    const effectiveHeight = hasPrecip
+      ? parseInt(config.forecast.chart_height) + precipExpandHeight
+      : parseInt(config.forecast.chart_height);
+    chartContainer.style.height = effectiveHeight + 'px';
+  }
+
   var style = getComputedStyle(document.body);
   var backgroundColor = config.eink_mode ? 'white' : style.getPropertyValue('--card-background-color');
   var textColor = config.eink_mode ? 'black' : style.getPropertyValue('--primary-text-color');
@@ -18700,6 +18719,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       animation: config.forecast.disable_animation === true ? { duration: 0 } : {},
       layout: {
         padding: {
+          top: parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) + 4,
           bottom: 10,
         },
       },
@@ -18936,7 +18956,7 @@ updateChart({ forecasts, forecastChart } = this) {
           margin-bottom: 10px;
         }
         .main ha-icon {
-          --mdc-icon-size: 50px;
+          --mdc-icon-size: ${config.icons_size * 2}px;
           margin-right: 14px;
           margin-inline-start: initial;
           margin-inline-end: 14px;

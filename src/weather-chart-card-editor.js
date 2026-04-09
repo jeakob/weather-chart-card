@@ -811,6 +811,13 @@ class WeatherChartCardEditor extends LitElement {
                 @change="${(e) => this._valueChanged(e, 'forecast.chart_height')}"
               ></ha-textfield>
               <ha-textfield
+                label="Extra height when raining (px)"
+                type="number"
+                min="0"
+                .value="${forecastConfig.precip_expand_height || '0'}"
+                @change="${(e) => this._valueChanged(e, 'forecast.precip_expand_height')}"
+              ></ha-textfield>
+              <ha-textfield
                 label="Number of forecasts"
                 type="number"
                 .value="${forecastConfig.number_of_forecasts || '0'}"
