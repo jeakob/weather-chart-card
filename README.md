@@ -3,7 +3,7 @@
 > A Home Assistant weather card optimised for e-ink displays, based on [mlamberts78/weather-chart-card](https://github.com/mlamberts78/weather-chart-card). Features configurable font sizes, e-ink colour modes, daily summaries, and full translation support.
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jeakob/weather-chart-card?style=flat-square)](https://github.com/jeakob/E-Ink-Weather-Card/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jeakob/E-Ink-Weather-Card?style=flat-square)](https://github.com/jeakob/E-Ink-Weather-Card/releases/latest)
 
 ![weather-chart-card](https://github.com/mlamberts78/weather-chart-card/assets/93537082/bd5b9f6e-4125-4a19-9773-463e6d054bce)
 ![15-days](https://github.com/mlamberts78/weather-chart-card/assets/93537082/f4de6060-7005-4a6d-b1f3-3aa17c856c73)
@@ -21,7 +21,7 @@ HACS is a third party community store and is not included in Home Assistant out 
 
 | Name                  | Type    | Default                  | Description                                                                                        |
 | ----------------------| ------- | -------------------------|--------------------------------------------------------------------------------------------------- |
-| type                  | string  | **Required**             | Should be `custom:weather-chart-card`.                                                             |
+| type                  | string  | **Required**             | Should be `custom:eink-weather-card`.                                                             |
 | entity                | string  | **Required**             | An entity_id with the `weather` domain.                                                            |
 | temp                  | string  | none                     | An entity_id for a custom temperature sensor.                                                      |
 | press                 | string  | none                     | An entity_id for a custom pressure sensor.                                                         |
@@ -115,7 +115,7 @@ Icons should be in svg format. Icons should have names as shown [here](https://g
 ###### Card with current time, date and day
 ![date-time](https://github.com/mlamberts78/weather-chart-card/assets/93537082/ab2c32f7-8c6a-4a7e-84fc-f857a519a725)
 ```yaml
-type: custom:weather-chart-card
+type: custom:eink-weather-card
 entity: weather.weather_home
 show_time: true
 show_day: true
@@ -127,7 +127,7 @@ icon_style: style1
 ###### Style2 chart
 ![style2](https://github.com/mlamberts78/weather-chart-card/assets/93537082/3067cc43-0e80-492c-b4a5-771b1e44ea17)
 ```yaml
-type: custom:weather-chart-card
+type: custom:eink-weather-card
 entity: weather.my_home
 forecast:
   style: style2
@@ -135,7 +135,7 @@ forecast:
 ###### Chart only
 ![Chart-only](https://github.com/mlamberts78/weather-chart-card/assets/93537082/c99d85a4-30d1-4fd9-90ff-877421b39e9b)
 ```yaml
-type: custom:weather-chart-card
+type: custom:eink-weather-card
 entity: weather.my_home
 show_main: false
 show_attributes: false
@@ -147,7 +147,7 @@ forecast:
 ###### Custom units
 ![Units](https://github.com/mlamberts78/weather-chart-card/assets/93537082/e72862ee-9bb7-4f97-9a3c-b17663c458aa)
 ```yaml
-type: custom:weather-chart-card
+type: custom:eink-weather-card
 entity: weather.my_home
 units:
   pressure: mmHg
@@ -183,7 +183,7 @@ units:
 
 ###### E-ink display example (Pimoroni Inky Impression 7.3")
 ```yaml
-type: custom:weather-chart-card
+type: custom:eink-weather-card
 entity: weather.home
 eink_mode: true
 show_attribute_labels: true

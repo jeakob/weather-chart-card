@@ -15,7 +15,7 @@ const ALT_SCHEMA = [
   { name: "custom_text_sensor", title: "Custom text sensor (displayed at top center)", selector: { entity: {} } },
 ];
 
-class WeatherChartCardEditor extends LitElement {
+class EinkWeatherCardEditor extends LitElement {
   static get properties() {
     return {
       _config: { type: Object },
@@ -937,4 +937,4 @@ class WeatherChartCardEditor extends LitElement {
     `;
   }
 }
-customElements.define("weather-chart-card-editor", WeatherChartCardEditor);
+customElements.define("eink-weather-card-editor", EinkWeatherCardEditor);

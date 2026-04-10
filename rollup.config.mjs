@@ -17,9 +17,9 @@ const serveopts = {
 export default {
   input: 'src/main.js',
   output: {
-    file: 'dist/weather-chart-card.js',
+    file: 'dist/eink-weather-card.js',
     format: 'cjs',
-    name: 'WeatherChartCard',
+    name: 'EinkWeatherCard',
     sourcemap: dev ? true : false,
   },
   plugins: [

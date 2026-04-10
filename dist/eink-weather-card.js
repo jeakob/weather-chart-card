@@ -1148,7 +1148,7 @@ const ALT_SCHEMA = [
   { name: "custom_text_sensor", title: "Custom text sensor (displayed at top center)", selector: { entity: {} } },
 ];
 
-class WeatherChartCardEditor extends s {
+class EinkWeatherCardEditor extends s {
   static get properties() {
     return {
       _config: { type: Object },
@@ -2070,7 +2070,7 @@ class WeatherChartCardEditor extends s {
     `;
   }
 }
-customElements.define("weather-chart-card-editor", WeatherChartCardEditor);
+customElements.define("eink-weather-card-editor", EinkWeatherCardEditor);
 
 /**
  * @license
@@ -18366,10 +18366,10 @@ var plugin = {
 
 Chart.register(...registerables, plugin);
 
-class WeatherChartCard extends s {
+class EinkWeatherCard extends s {
 
 static getConfigElement() {
-  return document.createElement("weather-chart-card-editor");
+  return document.createElement("eink-weather-card-editor");
 }
 
 static getStubConfig(hass, unusedEntities, allEntities) {
@@ -20040,11 +20040,11 @@ renderLastUpdated() {
   }
 }
 
-customElements.define('weather-chart-card', WeatherChartCard);
+customElements.define('eink-weather-card', EinkWeatherCard);
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: "weather-chart-card",
+  type: "eink-weather-card",
   name: "E-Ink Weather Card",
   description: "A weather card with chart, optimised for e-ink displays.",
   preview: true,

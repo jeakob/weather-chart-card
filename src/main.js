@@ -7,16 +7,16 @@ import {
   WeatherEntityFeature
 } from './const.js';
 import {LitElement, html} from 'lit';
-import './weather-chart-card-editor.js';
+import './eink-weather-card-editor.js';
 import { property } from 'lit/decorators.js';
 import {Chart, registerables} from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(...registerables, ChartDataLabels);
 
-class WeatherChartCard extends LitElement {
+class EinkWeatherCard extends LitElement {
 
 static getConfigElement() {
-  return document.createElement("weather-chart-card-editor");
+  return document.createElement("eink-weather-card-editor");
 }
 
 static getStubConfig(hass, unusedEntities, allEntities) {
@@ -1687,11 +1687,11 @@ renderLastUpdated() {
   }
 }
 
-customElements.define('weather-chart-card', WeatherChartCard);
+customElements.define('eink-weather-card', EinkWeatherCard);
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: "weather-chart-card",
+  type: "eink-weather-card",
   name: "E-Ink Weather Card",
   description: "A weather card with chart, optimised for e-ink displays.",
   preview: true,
