@@ -13,6 +13,8 @@ const locale = {
     'windGust': 'Nárazy větru',
     'sunrise': 'Východ',
     'sunset': 'Západ',
+    'tomorrow': 'Zítra',
+    'in2days': 'Za 2 dny',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -56,6 +58,8 @@ const locale = {
     'windGust': 'Nárazy vetra',
     'sunrise': 'Východ',
     'sunset': 'Západ',
+    'tomorrow': 'Zajtra',
+    'in2days': 'O 2 dni',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -99,6 +103,8 @@ const locale = {
     'windGust': 'Windböen',
     'sunrise': 'Aufgang',
     'sunset': 'Untergang',
+    'tomorrow': 'Morgen',
+    'in2days': 'In 2 Tagen',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -142,6 +148,8 @@ const locale = {
     'windGust': 'Windstoten',
     'sunrise': 'Opkomst',
     'sunset': 'Ondergang',
+    'tomorrow': 'Morgen',
+    'in2days': 'Over 2 dagen',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -185,6 +193,8 @@ const locale = {
     'windGust': 'Wind gust',
     'sunrise': 'Sunrise',
     'sunset': 'Sunset',
+    'tomorrow': 'Tomorrow',
+    'in2days': 'In 2 days',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -228,6 +238,8 @@ const locale = {
     'windGust': 'Ráfagas',
     'sunrise': 'Amanecer',
     'sunset': 'Atardecer',
+    'tomorrow': 'Mañana',
+    'in2days': 'En 2 días',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -271,6 +283,8 @@ const locale = {
     'windGust': 'Puuskat',
     'sunrise': 'Auringonnousu',
     'sunset': 'Auringonlasku',
+    'tomorrow': 'Huomenna',
+    'in2days': '2 päivän päästä',
 
     'units': {
       'km/h': 'km/h',
@@ -315,6 +329,8 @@ const locale = {
     'windGust': 'Széllökés',
     'sunrise': 'Napkelte',
     'sunset': 'Napnyugta',
+    'tomorrow': 'Holnap',
+    'in2days': '2 nap múlva',
 
     'units': {
       'km/h': 'km/h',
@@ -359,6 +375,8 @@ const locale = {
     'windGust': 'Порывы',
     'sunrise': 'Восход',
     'sunset': 'Закат',
+    'tomorrow': 'Завтра',
+    'in2days': 'Через 2 дня',
 
     'units': {
       'km/h': 'км/ч',
@@ -403,6 +421,8 @@ const locale = {
     'windGust': 'Vindbyar',
     'sunrise': 'Soluppgång',
     'sunset': 'Solnedgång',
+    'tomorrow': 'Imorgon',
+    'in2days': 'Om 2 dagar',
 
     'units': {
         'km/h': 'km/h',
@@ -447,6 +467,8 @@ const locale = {
     'windGust': 'Rafales',
     'sunrise': 'Lever',
     'sunset': 'Coucher',
+    'tomorrow': 'Demain',
+    'in2days': 'Dans 2 jours',
 
     'units': {
       'km/h': 'km/h',
@@ -491,6 +513,8 @@ const locale = {
     'windGust': 'Porywy',
     'sunrise': 'Wschód',
     'sunset': 'Zachód',
+    'tomorrow': 'Jutro',
+    'in2days': 'Za 2 dni',
 
     'units': {
       'km/h': 'km/h',
@@ -535,6 +559,8 @@ const locale = {
     'windGust': 'Vindkast',
     'sunrise': 'Soloppgang',
     'sunset': 'Solnedgang',
+    'tomorrow': 'I morgen',
+    'in2days': 'Om 2 dager',
 
     'units': {
       'km/h': 'km/t',
@@ -579,6 +605,8 @@ const locale = {
     'windGust': 'Vindstød',
     'sunrise': 'Solopgang',
     'sunset': 'Solnedgang',
+    'tomorrow': 'I morgen',
+    'in2days': 'Om 2 dage',
 
     'units': {
       'km/h': 'km/h',
@@ -623,6 +651,8 @@ const locale = {
     'windGust': 'Raffiche',
     'sunrise': 'Alba',
     'sunset': 'Tramonto',
+    'tomorrow': 'Domani',
+    'in2days': 'Tra 2 giorni',
 
     'units': {
       'km/h': 'km/h',
@@ -667,6 +697,8 @@ const locale = {
     'windGust': 'Rajadas',
     'sunrise': 'Nascer do sol',
     'sunset': 'Pôr do sol',
+    'tomorrow': 'Amanhã',
+    'in2days': 'Em 2 dias',
 
     'units': {
       'km/h': 'km/h',
@@ -711,6 +743,8 @@ const locale = {
     'windGust': 'Ριπές',
     'sunrise': 'Ανατολή',
     'sunset': 'Δύση',
+    'tomorrow': 'Αύριο',
+    'in2days': 'Σε 2 μέρες',
 
     'units': {
       'km/h': 'χλμ/ώρα',
@@ -755,6 +789,8 @@ const locale = {
     'windGust': 'Пориви',
     'sunrise': 'Изгрев',
     'sunset': 'Залез',
+    'tomorrow': 'Утре',
+    'in2days': 'След 2 дни',
 
     'units': {
       'km/h': 'км/ч',
@@ -799,6 +835,8 @@ const locale = {
     'windGust': 'Gūsiai',
     'sunrise': 'Saulėtekis',
     'sunset': 'Saulėlydis',
+    'tomorrow': 'Rytoj',
+    'in2days': 'Po 2 dienų',
 
     'units': {
       'km/h': 'km/h',
@@ -843,6 +881,8 @@ const locale = {
     'windGust': 'Ràfegues',
     'sunrise': 'Sortida',
     'sunset': 'Posta',
+    'tomorrow': 'Demà',
+    'in2days': "D'aquí 2 dies",
 
     'units': {
       'km/h': 'km/h',
@@ -887,6 +927,8 @@ const locale = {
     'windGust': 'Rafale',
     'sunrise': 'Răsărit',
     'sunset': 'Apus',
+    'tomorrow': 'Mâine',
+    'in2days': 'În 2 zile',
 
     'units': {
       'km/h': 'km/h',
@@ -931,6 +973,8 @@ const locale = {
     'windGust': 'Пориви',
     'sunrise': 'Схід',
     'sunset': 'Захід',
+    'tomorrow': 'Завтра',
+    'in2days': 'Через 2 дні',
 
     'units': {
       'km/h': 'км/год',
@@ -975,6 +1019,8 @@ const locale = {
     'windGust': '돌풍',
     'sunrise': '일출',
     'sunset': '일몰',
+    'tomorrow': '내일',
+    'in2days': '모레',
 
     'units': {
       'km/h': 'km/h',

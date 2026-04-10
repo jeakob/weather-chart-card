@@ -15,6 +15,8 @@ const locale = {
     'windGust': 'Nárazy větru',
     'sunrise': 'Východ',
     'sunset': 'Západ',
+    'tomorrow': 'Zítra',
+    'in2days': 'Za 2 dny',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -58,6 +60,8 @@ const locale = {
     'windGust': 'Nárazy vetra',
     'sunrise': 'Východ',
     'sunset': 'Západ',
+    'tomorrow': 'Zajtra',
+    'in2days': 'O 2 dni',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -101,6 +105,8 @@ const locale = {
     'windGust': 'Windböen',
     'sunrise': 'Aufgang',
     'sunset': 'Untergang',
+    'tomorrow': 'Morgen',
+    'in2days': 'In 2 Tagen',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -144,6 +150,8 @@ const locale = {
     'windGust': 'Windstoten',
     'sunrise': 'Opkomst',
     'sunset': 'Ondergang',
+    'tomorrow': 'Morgen',
+    'in2days': 'Over 2 dagen',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -187,6 +195,8 @@ const locale = {
     'windGust': 'Wind gust',
     'sunrise': 'Sunrise',
     'sunset': 'Sunset',
+    'tomorrow': 'Tomorrow',
+    'in2days': 'In 2 days',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -230,6 +240,8 @@ const locale = {
     'windGust': 'Ráfagas',
     'sunrise': 'Amanecer',
     'sunset': 'Atardecer',
+    'tomorrow': 'Mañana',
+    'in2days': 'En 2 días',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -273,6 +285,8 @@ const locale = {
     'windGust': 'Puuskat',
     'sunrise': 'Auringonnousu',
     'sunset': 'Auringonlasku',
+    'tomorrow': 'Huomenna',
+    'in2days': '2 päivän päästä',
 
     'units': {
       'km/h': 'km/h',
@@ -317,6 +331,8 @@ const locale = {
     'windGust': 'Széllökés',
     'sunrise': 'Napkelte',
     'sunset': 'Napnyugta',
+    'tomorrow': 'Holnap',
+    'in2days': '2 nap múlva',
 
     'units': {
       'km/h': 'km/h',
@@ -361,6 +377,8 @@ const locale = {
     'windGust': 'Порывы',
     'sunrise': 'Восход',
     'sunset': 'Закат',
+    'tomorrow': 'Завтра',
+    'in2days': 'Через 2 дня',
 
     'units': {
       'km/h': 'км/ч',
@@ -405,6 +423,8 @@ const locale = {
     'windGust': 'Vindbyar',
     'sunrise': 'Soluppgång',
     'sunset': 'Solnedgång',
+    'tomorrow': 'Imorgon',
+    'in2days': 'Om 2 dagar',
 
     'units': {
         'km/h': 'km/h',
@@ -449,6 +469,8 @@ const locale = {
     'windGust': 'Rafales',
     'sunrise': 'Lever',
     'sunset': 'Coucher',
+    'tomorrow': 'Demain',
+    'in2days': 'Dans 2 jours',
 
     'units': {
       'km/h': 'km/h',
@@ -493,6 +515,8 @@ const locale = {
     'windGust': 'Porywy',
     'sunrise': 'Wschód',
     'sunset': 'Zachód',
+    'tomorrow': 'Jutro',
+    'in2days': 'Za 2 dni',
 
     'units': {
       'km/h': 'km/h',
@@ -537,6 +561,8 @@ const locale = {
     'windGust': 'Vindkast',
     'sunrise': 'Soloppgang',
     'sunset': 'Solnedgang',
+    'tomorrow': 'I morgen',
+    'in2days': 'Om 2 dager',
 
     'units': {
       'km/h': 'km/t',
@@ -581,6 +607,8 @@ const locale = {
     'windGust': 'Vindstød',
     'sunrise': 'Solopgang',
     'sunset': 'Solnedgang',
+    'tomorrow': 'I morgen',
+    'in2days': 'Om 2 dage',
 
     'units': {
       'km/h': 'km/h',
@@ -625,6 +653,8 @@ const locale = {
     'windGust': 'Raffiche',
     'sunrise': 'Alba',
     'sunset': 'Tramonto',
+    'tomorrow': 'Domani',
+    'in2days': 'Tra 2 giorni',
 
     'units': {
       'km/h': 'km/h',
@@ -669,6 +699,8 @@ const locale = {
     'windGust': 'Rajadas',
     'sunrise': 'Nascer do sol',
     'sunset': 'Pôr do sol',
+    'tomorrow': 'Amanhã',
+    'in2days': 'Em 2 dias',
 
     'units': {
       'km/h': 'km/h',
@@ -713,6 +745,8 @@ const locale = {
     'windGust': 'Ριπές',
     'sunrise': 'Ανατολή',
     'sunset': 'Δύση',
+    'tomorrow': 'Αύριο',
+    'in2days': 'Σε 2 μέρες',
 
     'units': {
       'km/h': 'χλμ/ώρα',
@@ -757,6 +791,8 @@ const locale = {
     'windGust': 'Пориви',
     'sunrise': 'Изгрев',
     'sunset': 'Залез',
+    'tomorrow': 'Утре',
+    'in2days': 'След 2 дни',
 
     'units': {
       'km/h': 'км/ч',
@@ -801,6 +837,8 @@ const locale = {
     'windGust': 'Gūsiai',
     'sunrise': 'Saulėtekis',
     'sunset': 'Saulėlydis',
+    'tomorrow': 'Rytoj',
+    'in2days': 'Po 2 dienų',
 
     'units': {
       'km/h': 'km/h',
@@ -845,6 +883,8 @@ const locale = {
     'windGust': 'Ràfegues',
     'sunrise': 'Sortida',
     'sunset': 'Posta',
+    'tomorrow': 'Demà',
+    'in2days': "D'aquí 2 dies",
 
     'units': {
       'km/h': 'km/h',
@@ -889,6 +929,8 @@ const locale = {
     'windGust': 'Rafale',
     'sunrise': 'Răsărit',
     'sunset': 'Apus',
+    'tomorrow': 'Mâine',
+    'in2days': 'În 2 zile',
 
     'units': {
       'km/h': 'km/h',
@@ -933,6 +975,8 @@ const locale = {
     'windGust': 'Пориви',
     'sunrise': 'Схід',
     'sunset': 'Захід',
+    'tomorrow': 'Завтра',
+    'in2days': 'Через 2 дні',
 
     'units': {
       'km/h': 'км/год',
@@ -977,6 +1021,8 @@ const locale = {
     'windGust': '돌풍',
     'sunrise': '일출',
     'sunset': '일몰',
+    'tomorrow': '내일',
+    'in2days': '모레',
 
     'units': {
       'km/h': 'km/h',
@@ -1099,6 +1145,7 @@ const ALT_SCHEMA = [
   { name: "dew_point", title: "Alternative dew pointsensor", selector: { entity: { domain: 'sensor' } } },
   { name: "wind_gust_speed", title: "Alternative wind gust speed sensor", selector: { entity: { domain: 'sensor' } } },
   { name: "visibility", title: "Alternative visibility sensor", selector: { entity: { domain: 'sensor' } } },
+  { name: "custom_text_sensor", title: "Custom text sensor (displayed at top center)", selector: { entity: {} } },
 ];
 
 class WeatherChartCardEditor extends s {
@@ -1813,6 +1860,31 @@ class WeatherChartCardEditor extends s {
           <label class="switch-label">
             Show Attribute Labels (e.g. Humidity, Pressure, Wind)
           </label>
+        </div>
+        <div class="switch-container">
+          <ha-switch
+            @change="${(e) => this._valueChanged(e, 'show_daily_summary')}"
+            .checked="${this._config.show_daily_summary === true}"
+          ></ha-switch>
+          <label class="switch-label">
+            Show Tomorrow & In 2 Days Summary
+          </label>
+        </div>
+        <div class="switch-container">
+          <ha-switch
+            @change="${(e) => this._valueChanged(e, 'eink_color_mode')}"
+            .checked="${this._config.eink_color_mode === true}"
+          ></ha-switch>
+          <label class="switch-label">
+            E-Ink Color Mode (7-color e-ink palette, bold, no animations)
+          </label>
+        </div>
+        <div class="textfield-container">
+          <ha-textfield
+            label="Custom text sensor entity"
+            .value="${this._config.custom_text_sensor || ''}"
+            @change="${(e) => this._valueChanged(e, 'custom_text_sensor')}"
+          ></ha-textfield>
         </div>
       </div>
 
@@ -18390,7 +18462,10 @@ setConfig(config) {
     wind_unit_text_size: 9,
     last_updated_text_size: 13,
     eink_mode: false,
+    eink_color_mode: false,
     show_attribute_labels: false,
+    show_daily_summary: false,
+    custom_text_sensor: '',
     show_feels_like: false,
     show_dew_point: false,
     show_wind_gust_speed: false,
@@ -18429,6 +18504,17 @@ setConfig(config) {
   };
 
   cardConfig.units.speed = config.speed ? config.speed : cardConfig.units.speed;
+
+  // E-ink color mode: force disable animations and set e-ink friendly colors
+  if (cardConfig.eink_color_mode) {
+    cardConfig.forecast.disable_animation = true;
+    // Pimoroni Inky Impression 7-color e-ink palette shades
+    if (!config.forecast || !config.forecast.temperature1_color) cardConfig.forecast.temperature1_color = 'rgba(200, 80, 0, 1.0)';
+    if (!config.forecast || !config.forecast.temperature2_color) cardConfig.forecast.temperature2_color = 'rgba(0, 60, 120, 1.0)';
+    if (!config.forecast || !config.forecast.precipitation_color) cardConfig.forecast.precipitation_color = 'rgba(0, 80, 160, 0.7)';
+    if (!config.forecast || !config.forecast.chart_line_width) cardConfig.forecast.chart_line_width = 2.5;
+    if (!config.forecast || !config.forecast.chart_point_radius) cardConfig.forecast.chart_point_radius = 3;
+  }
 
   // E-ink mode: force disable animations and apply larger defaults for e-ink displays
   if (cardConfig.eink_mode) {
@@ -18490,6 +18576,7 @@ set hass(hass) {
 
     this.feels_like = this.config.feels_like && hass.states[this.config.feels_like] ? hass.states[this.config.feels_like].state : this.weather.attributes.apparent_temperature;
     this.description = this.config.description && hass.states[this.config.description] ? hass.states[this.config.description].state : this.weather.attributes.description;
+    this.custom_text = this.config.custom_text_sensor && hass.states[this.config.custom_text_sensor] ? hass.states[this.config.custom_text_sensor].state : null;
   }
 
   if (this.weather && !this.forecastSubscriber) {
@@ -18815,9 +18902,10 @@ drawChart({ config, language, weather, forecastItems } = this) {
   }
 
   var style = getComputedStyle(document.body);
-  var backgroundColor = config.eink_mode ? 'white' : style.getPropertyValue('--card-background-color');
-  var textColor = config.eink_mode ? 'black' : style.getPropertyValue('--primary-text-color');
-  var dividerColor = config.eink_mode ? '#ccc' : style.getPropertyValue('--divider-color');
+  const isEink = config.eink_mode || config.eink_color_mode;
+  var backgroundColor = isEink ? 'white' : style.getPropertyValue('--card-background-color');
+  var textColor = isEink ? 'black' : style.getPropertyValue('--primary-text-color');
+  var dividerColor = isEink ? '#ccc' : style.getPropertyValue('--divider-color');
   const canvas = this.renderRoot.querySelector('#forecastChart');
   if (!canvas) {
     requestAnimationFrame(() => this.drawChart());
@@ -18923,7 +19011,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       color: chart_text_color || config.forecast.temperature1_color,
       font: {
         size: parseInt(config.forecast.labels_font_size) + 1,
-        weight: config.eink_mode ? 'bold' : 'normal',
+        weight: (config.eink_mode || config.eink_color_mode) ? 'bold' : 'normal',
         lineHeight: 0.7,
       },
     };
@@ -18942,7 +19030,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       color: chart_text_color || config.forecast.temperature2_color,
       font: {
         size: parseInt(config.forecast.labels_font_size) + 1,
-        weight: config.eink_mode ? 'bold' : 'normal',
+        weight: (config.eink_mode || config.eink_color_mode) ? 'bold' : 'normal',
         lineHeight: 0.7,
       },
     };
@@ -18980,7 +19068,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
               padding: config.forecast.precipitation_type === 'rainfall' && config.forecast.show_probability && config.forecast.type !== 'hourly' ? 4 : 10,
               font: {
                 size: parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size),
-                weight: config.eink_mode ? 'bold' : 'normal',
+                weight: (config.eink_mode || config.eink_color_mode) ? 'bold' : 'normal',
               },
               callback: function (value, index, values) {
                   var datetime = this.getLabelForValue(value);
@@ -19053,7 +19141,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
           color: chart_text_color || textColor,
           font: {
             size: config.forecast.labels_font_size,
-            weight: config.eink_mode ? 'bold' : 'normal',
+            weight: (config.eink_mode || config.eink_color_mode) ? 'bold' : 'normal',
             lineHeight: 0.7,
           },
           formatter: function (value, context) {
@@ -19319,6 +19407,57 @@ updateChart({ forecasts, forecastChart } = this) {
           font-weight: 300;
           margin-bottom: 1px;
         }
+        .custom-text-sensor {
+          text-align: center;
+          font-size: ${config.attributes_text_size}px;
+          font-weight: 400;
+          margin-bottom: 8px;
+          color: var(--primary-text-color);
+        }
+        .daily-summary {
+          display: flex;
+          justify-content: space-around;
+          gap: 8px;
+          margin-top: 8px;
+        }
+        .daily-summary-item {
+          flex: 1;
+          border: 2px solid var(--divider-color);
+          border-radius: 8px;
+          padding: 8px;
+          text-align: center;
+          font-size: ${Math.max(parseInt(config.attributes_text_size) - 2, 10)}px;
+        }
+        .daily-summary-item .day-label {
+          font-weight: 700;
+          margin-bottom: 4px;
+          font-size: ${parseInt(config.attributes_text_size)}px;
+        }
+        .daily-summary-item .summary-row {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          margin: 2px 0;
+        }
+        .daily-summary-item .summary-temp {
+          font-size: ${parseInt(config.current_temp_size) - 6}px;
+          font-weight: 700;
+        }
+        .daily-summary-item img {
+          width: ${Math.max(parseInt(config.forecast.condition_icon_size) - 5, 15)}px;
+          height: ${Math.max(parseInt(config.forecast.condition_icon_size) - 5, 15)}px;
+        }
+        .daily-summary-item ha-icon {
+          --mdc-icon-size: ${Math.max(parseInt(config.forecast.condition_icon_size) - 5, 15)}px;
+        }
+        .daily-summary-item .summary-condition {
+          font-style: italic;
+          font-size: ${Math.max(parseInt(config.attributes_text_size) - 3, 9)}px;
+        }
+        .daily-summary-item .summary-wind {
+          font-size: ${Math.max(parseInt(config.attributes_text_size) - 3, 9)}px;
+        }
         ${config.eink_mode ? `
         ha-card {
           background: white !important;
@@ -19360,23 +19499,86 @@ updateChart({ forecasts, forecastChart } = this) {
         .current-time {
           font-weight: 600;
         }
+        .daily-summary-item {
+          border-color: #666 !important;
+        }
+        ` : ''}
+        ${config.eink_color_mode ? `
+        ha-card {
+          background: white !important;
+          color: black !important;
+          --primary-text-color: black;
+          --secondary-text-color: #444;
+          --paper-item-icon-color: #222;
+          --divider-color: #999;
+        }
+        .main {
+          font-weight: 700;
+          color: black !important;
+        }
+        .main span {
+          color: #444 !important;
+          font-weight: 600;
+        }
+        .main .feels-like,
+        .main .description {
+          font-weight: 500;
+        }
+        .attributes {
+          font-weight: 400 !important;
+        }
+        .attributes ha-icon {
+          color: #222 !important;
+        }
+        .wind-details {
+          font-weight: 400;
+        }
+        .date-text {
+          color: #444 !important;
+          font-weight: 500;
+        }
+        .current-time {
+          font-weight: 600;
+        }
+        .daily-summary-item {
+          border-color: #888 !important;
+          background: #f0f0f0 !important;
+        }
+        .daily-summary-item .day-label {
+          color: #c03000 !important;
+        }
+        .custom-text-sensor {
+          color: black !important;
+          font-weight: 500;
+        }
         ` : ''}
       </style>
 
       <ha-card header="${config.title}">
         <div class="card">
           ${this.renderMain()}
+          ${this.renderCustomTextSensor()}
           ${this.renderAttributes()}
           <div class="chart-container">
             <canvas id="forecastChart"></canvas>
           </div>
           ${this.renderForecastConditionIcons()}
           ${this.renderWind()}
+          ${this.renderDailySummary()}
           ${this.renderLastUpdated()}
         </div>
       </ha-card>
     `;
   }
+
+renderCustomTextSensor({ config, custom_text } = this) {
+  if (!config.custom_text_sensor || !custom_text) return x``;
+  return x`
+    <div class="custom-text-sensor">
+      ${custom_text}
+    </div>
+  `;
+}
 
 renderMain({ config, sun, weather, temperature, feels_like, description } = this) {
   if (config.show_main === false)
@@ -19732,6 +19934,87 @@ renderWind({ config, weather, windSpeed, windDirection, forecastItems } = this) 
           `;
         })}
       ` : ''}
+    </div>
+  `;
+}
+
+renderDailySummary({ config, sun } = this) {
+  if (config.show_daily_summary !== true) return x``;
+  if (!this.forecasts || !this.forecasts.length) return x``;
+
+  // Need daily forecasts - find tomorrow and day after
+  const now = new Date();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0,0,0,0);
+  const dayAfter = new Date(now);
+  dayAfter.setDate(dayAfter.getDate() + 2);
+  dayAfter.setHours(0,0,0,0);
+
+  let tomorrowForecast = null;
+  let dayAfterForecast = null;
+
+  for (const f of this.forecasts) {
+    const fDate = new Date(f.datetime);
+    fDate.setHours(0,0,0,0);
+    if (!tomorrowForecast && fDate.getTime() === tomorrow.getTime()) {
+      tomorrowForecast = f;
+    } else if (!dayAfterForecast && fDate.getTime() === dayAfter.getTime()) {
+      dayAfterForecast = f;
+    }
+    if (tomorrowForecast && dayAfterForecast) break;
+  }
+
+  // Fallback: use first two forecasts if daily matching fails (e.g. hourly mode)
+  if (!tomorrowForecast && this.forecasts.length > 0) tomorrowForecast = this.forecasts[0];
+  if (!dayAfterForecast && this.forecasts.length > 1) dayAfterForecast = this.forecasts[1];
+
+  const renderSummaryItem = (forecast, label) => {
+    if (!forecast) return x``;
+    const condition = forecast.condition;
+    const tempHi = forecast.temperature !== undefined ? Math.round(forecast.temperature) : '?';
+    const tempLo = forecast.templow !== undefined ? Math.round(forecast.templow) : null;
+    const windSpeed = forecast.wind_speed !== undefined ? Math.round(forecast.wind_speed) : null;
+    const windUnit = this.ll('units')[this.unitSpeed];
+
+    let iconHtml;
+    if (config.animated_icons || config.icons) {
+      const icons = weatherIconsDay;
+      const iconSrc = config.animated_icons ?
+        `${this.baseIconPath}${icons[condition]}.svg` :
+        `${this.config.icons}${icons[condition]}.svg`;
+      iconHtml = x`<img src="${iconSrc}" alt="">`;
+    } else {
+      iconHtml = x`<ha-icon icon="${this.getWeatherIcon(condition, 'above_horizon')}"></ha-icon>`;
+    }
+
+    return x`
+      <div class="daily-summary-item">
+        <div class="day-label">${label}</div>
+        <div class="summary-row">
+          <span class="summary-temp">${tempHi}°</span>
+          ${iconHtml}
+        </div>
+        ${tempLo !== null ? x`
+          <div class="summary-row">
+            <span>${this.ll('tempLo')}: ${tempLo}°</span>
+          </div>
+        ` : ''}
+        ${windSpeed !== null ? x`
+          <div class="summary-wind">
+            <ha-icon icon="hass:weather-windy" style="--mdc-icon-size: 14px;"></ha-icon>
+            ${windSpeed} ${windUnit}
+          </div>
+        ` : ''}
+        <div class="summary-condition">${this.ll(condition)}</div>
+      </div>
+    `;
+  };
+
+  return x`
+    <div class="daily-summary">
+      ${renderSummaryItem(tomorrowForecast, this.ll('tomorrow'))}
+      ${renderSummaryItem(dayAfterForecast, this.ll('in2days'))}
     </div>
   `;
 }

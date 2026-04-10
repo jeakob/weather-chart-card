@@ -12,6 +12,7 @@ const ALT_SCHEMA = [
   { name: "dew_point", title: "Alternative dew pointsensor", selector: { entity: { domain: 'sensor' } } },
   { name: "wind_gust_speed", title: "Alternative wind gust speed sensor", selector: { entity: { domain: 'sensor' } } },
   { name: "visibility", title: "Alternative visibility sensor", selector: { entity: { domain: 'sensor' } } },
+  { name: "custom_text_sensor", title: "Custom text sensor (displayed at top center)", selector: { entity: {} } },
 ];
 
 class WeatherChartCardEditor extends LitElement {
@@ -726,6 +727,31 @@ class WeatherChartCardEditor extends LitElement {
           <label class="switch-label">
             Show Attribute Labels (e.g. Humidity, Pressure, Wind)
           </label>
+        </div>
+        <div class="switch-container">
+          <ha-switch
+            @change="${(e) => this._valueChanged(e, 'show_daily_summary')}"
+            .checked="${this._config.show_daily_summary === true}"
+          ></ha-switch>
+          <label class="switch-label">
+            Show Tomorrow & In 2 Days Summary
+          </label>
+        </div>
+        <div class="switch-container">
+          <ha-switch
+            @change="${(e) => this._valueChanged(e, 'eink_color_mode')}"
+            .checked="${this._config.eink_color_mode === true}"
+          ></ha-switch>
+          <label class="switch-label">
+            E-Ink Color Mode (7-color e-ink palette, bold, no animations)
+          </label>
+        </div>
+        <div class="textfield-container">
+          <ha-textfield
+            label="Custom text sensor entity"
+            .value="${this._config.custom_text_sensor || ''}"
+            @change="${(e) => this._valueChanged(e, 'custom_text_sensor')}"
+          ></ha-textfield>
         </div>
       </div>
 
