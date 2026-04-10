@@ -6,6 +6,15 @@ const locale = {
     'tempLo': 'Teplota v noci',
     'precip': 'Srážky',
     'feelsLike': 'Pocitová teplota',
+    'humidity': 'Vlhkost',
+    'pressure': 'Tlak',
+    'dewPoint': 'Rosný bod',
+    'visibility': 'Viditelnost',
+    'windDir': 'Směr větru',
+    'windSpeed': 'Rychlost větru',
+    'windGust': 'Nárazy větru',
+    'sunrise': 'Východ',
+    'sunset': 'Západ',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -40,6 +49,15 @@ const locale = {
     'tempLo': 'Teplota v noci',
     'precip': 'Zrážky',
     'feelsLike': 'Pocitová teplota',
+    'humidity': 'Vlhkosť',
+    'pressure': 'Tlak',
+    'dewPoint': 'Rosný bod',
+    'visibility': 'Viditeľnosť',
+    'windDir': 'Smer vetra',
+    'windSpeed': 'Rýchlosť vetra',
+    'windGust': 'Nárazy vetra',
+    'sunrise': 'Východ',
+    'sunset': 'Západ',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -74,6 +92,15 @@ const locale = {
     'tempLo': 'Nachttemperatur',
     'precip': 'Niederschlag',
     'feelsLike': 'Gefühlt',
+    'humidity': 'Feuchtigkeit',
+    'pressure': 'Luftdruck',
+    'dewPoint': 'Taupunkt',
+    'visibility': 'Sichtweite',
+    'windDir': 'Windrichtung',
+    'windSpeed': 'Windgeschw.',
+    'windGust': 'Windböen',
+    'sunrise': 'Aufgang',
+    'sunset': 'Untergang',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -108,6 +135,15 @@ const locale = {
     'tempLo': 'Nachttemperatuur',
     'precip': 'Neerslag',
     'feelsLike': 'Voelt als',
+    'humidity': 'Vochtigheid',
+    'pressure': 'Luchtdruk',
+    'dewPoint': 'Dauwpunt',
+    'visibility': 'Zichtbaarheid',
+    'windDir': 'Windrichting',
+    'windSpeed': 'Windsnelheid',
+    'windGust': 'Windstoten',
+    'sunrise': 'Opkomst',
+    'sunset': 'Ondergang',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -142,6 +178,15 @@ const locale = {
     'tempLo': 'Temperature night',
     'precip': 'Precipitations',
     'feelsLike': 'Feels like',
+    'humidity': 'Humidity',
+    'pressure': 'Pressure',
+    'dewPoint': 'Dew point',
+    'visibility': 'Visibility',
+    'windDir': 'Wind dir.',
+    'windSpeed': 'Wind speed',
+    'windGust': 'Wind gust',
+    'sunrise': 'Sunrise',
+    'sunset': 'Sunset',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -176,6 +221,15 @@ const locale = {
     'tempLo': 'Temperatura mínima',
     'precip': 'Precipitación',
     'feelsLike': 'Sensación térmica',
+    'humidity': 'Humedad',
+    'pressure': 'Presión',
+    'dewPoint': 'Punto de rocío',
+    'visibility': 'Visibilidad',
+    'windDir': 'Dir. viento',
+    'windSpeed': 'Vel. viento',
+    'windGust': 'Ráfagas',
+    'sunrise': 'Amanecer',
+    'sunset': 'Atardecer',
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -210,6 +264,16 @@ const locale = {
     'tempLo': 'Lämpötila alin',
     'precip': 'Sademäärä',
     'feelsLike': 'Tuntuu kuin',
+    'humidity': 'Kosteus',
+    'pressure': 'Paine',
+    'dewPoint': 'Kastepiste',
+    'visibility': 'Näkyvyys',
+    'windDir': 'Tuulen suunta',
+    'windSpeed': 'Tuulen nop.',
+    'windGust': 'Puuskat',
+    'sunrise': 'Auringonnousu',
+    'sunset': 'Auringonlasku',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -244,6 +308,16 @@ const locale = {
     'tempLo': 'Min. hőmérséklet',
     'precip': 'Csapadék',
     'feelsLike': 'Hőérzet',
+    'humidity': 'Páratartalom',
+    'pressure': 'Légnyomás',
+    'dewPoint': 'Harmatpont',
+    'visibility': 'Láthatóság',
+    'windDir': 'Szélirány',
+    'windSpeed': 'Szélsebesség',
+    'windGust': 'Széllökés',
+    'sunrise': 'Napkelte',
+    'sunset': 'Napnyugta',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -278,6 +352,16 @@ const locale = {
     'tempLo': 'Температура ночью',
     'precip': 'Осадки',
     'feelsLike': 'Ощущается как',
+    'humidity': 'Влажность',
+    'pressure': 'Давление',
+    'dewPoint': 'Точка росы',
+    'visibility': 'Видимость',
+    'windDir': 'Напр. ветра',
+    'windSpeed': 'Скор. ветра',
+    'windGust': 'Порывы',
+    'sunrise': 'Восход',
+    'sunset': 'Закат',
+
     'units': {
       'km/h': 'км/ч',
       'm/s': 'м/с',
@@ -312,6 +396,16 @@ const locale = {
     'tempLo': 'Temperatur min',
     'precip': 'Nederbörd',
     'feelsLike': 'Känns som',
+    'humidity': 'Luftfuktighet',
+    'pressure': 'Lufttryck',
+    'dewPoint': 'Daggpunkt',
+    'visibility': 'Sikt',
+    'windDir': 'Vindriktning',
+    'windSpeed': 'Vindhastighet',
+    'windGust': 'Vindbyar',
+    'sunrise': 'Soluppgång',
+    'sunset': 'Solnedgång',
+
     'units': {
         'km/h': 'km/h',
         'm/s': 'm/s',
@@ -346,6 +440,16 @@ const locale = {
     'tempLo': 'Température min',
     'precip': 'Précipitations',
     'feelsLike': 'Ressenti',
+    'humidity': 'Humidité',
+    'pressure': 'Pression',
+    'dewPoint': 'Point de rosée',
+    'visibility': 'Visibilité',
+    'windDir': 'Dir. vent',
+    'windSpeed': 'Vit. vent',
+    'windGust': 'Rafales',
+    'sunrise': 'Lever',
+    'sunset': 'Coucher',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -380,6 +484,16 @@ const locale = {
     'tempLo': 'Temperatura w nocy',
     'precip': 'Opady',
     'feelsLike': 'Odczuwalna',
+    'humidity': 'Wilgotność',
+    'pressure': 'Ciśnienie',
+    'dewPoint': 'Punkt rosy',
+    'visibility': 'Widoczność',
+    'windDir': 'Kier. wiatru',
+    'windSpeed': 'Pręd. wiatru',
+    'windGust': 'Porywy',
+    'sunrise': 'Wschód',
+    'sunset': 'Zachód',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -414,6 +528,16 @@ const locale = {
     'tempLo': 'Minimumstemperatur',
     'precip': 'Nedbør',
     'feelsLike': 'Føles som',
+    'humidity': 'Fuktighet',
+    'pressure': 'Lufttrykk',
+    'dewPoint': 'Duggpunkt',
+    'visibility': 'Sikt',
+    'windDir': 'Vindretning',
+    'windSpeed': 'Vindhastighet',
+    'windGust': 'Vindkast',
+    'sunrise': 'Soloppgang',
+    'sunset': 'Solnedgang',
+
     'units': {
       'km/h': 'km/t',
       'm/s': 'm/s',
@@ -448,6 +572,16 @@ const locale = {
     'tempLo': 'Nattemperatur',
     'precip': 'Nedbør',
     'feelsLike': 'Føles som',
+    'humidity': 'Fugtighed',
+    'pressure': 'Lufttryk',
+    'dewPoint': 'Dugpunkt',
+    'visibility': 'Sigtbarhed',
+    'windDir': 'Vindretning',
+    'windSpeed': 'Vindhastighed',
+    'windGust': 'Vindstød',
+    'sunrise': 'Solopgang',
+    'sunset': 'Solnedgang',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -482,6 +616,16 @@ const locale = {
     'tempLo': 'Temperatura notte',
     'precip': 'Precipitazioni',
     'feelsLike': 'Percepito come',
+    'humidity': 'Umidità',
+    'pressure': 'Pressione',
+    'dewPoint': 'Punto di rugiada',
+    'visibility': 'Visibilità',
+    'windDir': 'Dir. vento',
+    'windSpeed': 'Vel. vento',
+    'windGust': 'Raffiche',
+    'sunrise': 'Alba',
+    'sunset': 'Tramonto',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -516,6 +660,16 @@ const locale = {
     'tempLo': 'Temperatura noite',
     'precip': 'Precipitação',
     'feelsLike': 'Sensação Térmica',
+    'humidity': 'Humidade',
+    'pressure': 'Pressão',
+    'dewPoint': 'Ponto de orvalho',
+    'visibility': 'Visibilidade',
+    'windDir': 'Dir. vento',
+    'windSpeed': 'Vel. vento',
+    'windGust': 'Rajadas',
+    'sunrise': 'Nascer do sol',
+    'sunset': 'Pôr do sol',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -550,6 +704,16 @@ const locale = {
     'tempLo': 'Ελάχιστη θερμοκρασία νύχτας',
     'precip': 'Υετός',
     'feelsLike': 'Αίσθηση σαν',
+    'humidity': 'Υγρασία',
+    'pressure': 'Πίεση',
+    'dewPoint': 'Σημ. δρόσου',
+    'visibility': 'Ορατότητα',
+    'windDir': 'Κατ. ανέμου',
+    'windSpeed': 'Ταχ. ανέμου',
+    'windGust': 'Ριπές',
+    'sunrise': 'Ανατολή',
+    'sunset': 'Δύση',
+
     'units': {
       'km/h': 'χλμ/ώρα',
       'm/s': 'μ/δ',
@@ -584,6 +748,16 @@ const locale = {
     'tempLo': 'Минимална температура',
     'precip': 'Валежи',
     'feelsLike': 'Усеща се като',
+    'humidity': 'Влажност',
+    'pressure': 'Налягане',
+    'dewPoint': 'Точка на оросяване',
+    'visibility': 'Видимост',
+    'windDir': 'Посока на вятъра',
+    'windSpeed': 'Скор. на вятъра',
+    'windGust': 'Пориви',
+    'sunrise': 'Изгрев',
+    'sunset': 'Залез',
+
     'units': {
       'km/h': 'км/ч',
       'm/s': 'м/с',
@@ -618,6 +792,16 @@ const locale = {
     'tempLo': 'Naktį',
     'precip': 'Krituliai',
     'feelsLike': 'Jaučiama',
+    'humidity': 'Drėgmė',
+    'pressure': 'Slėgis',
+    'dewPoint': 'Rasos taškas',
+    'visibility': 'Matomumas',
+    'windDir': 'Vėjo kryptis',
+    'windSpeed': 'Vėjo greitis',
+    'windGust': 'Gūsiai',
+    'sunrise': 'Saulėtekis',
+    'sunset': 'Saulėlydis',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -652,6 +836,16 @@ const locale = {
     'tempLo': 'Temperatura mínima',
     'precip': 'Precipitació',
     'feelsLike': 'Sensació tèrmica',
+    'humidity': 'Humitat',
+    'pressure': 'Pressió',
+    'dewPoint': 'Punt de rosada',
+    'visibility': 'Visibilitat',
+    'windDir': 'Dir. vent',
+    'windSpeed': 'Vel. vent',
+    'windGust': 'Ràfegues',
+    'sunrise': 'Sortida',
+    'sunset': 'Posta',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -686,6 +880,16 @@ const locale = {
     'tempLo': 'Temperatură noaptea',
     'precip': 'Precipitații',
     'feelsLike': 'Se simte ca',
+    'humidity': 'Umiditate',
+    'pressure': 'Presiune',
+    'dewPoint': 'Punct de rouă',
+    'visibility': 'Vizibilitate',
+    'windDir': 'Dir. vânt',
+    'windSpeed': 'Vit. vânt',
+    'windGust': 'Rafale',
+    'sunrise': 'Răsărit',
+    'sunset': 'Apus',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -720,6 +924,16 @@ const locale = {
     'tempLo': 'Температура вночі',
     'precip': 'Опади',
     'feelsLike': 'Відчувається як',
+    'humidity': 'Вологість',
+    'pressure': 'Тиск',
+    'dewPoint': 'Точка роси',
+    'visibility': 'Видимість',
+    'windDir': 'Напр. вітру',
+    'windSpeed': 'Швидк. вітру',
+    'windGust': 'Пориви',
+    'sunrise': 'Схід',
+    'sunset': 'Захід',
+
     'units': {
       'km/h': 'км/год',
       'm/s': 'м/с',
@@ -754,6 +968,16 @@ const locale = {
     'tempLo': '최저 기온',
     'precip': '강수',
     'feelsLike': '체감',
+    'humidity': '습도',
+    'pressure': '기압',
+    'dewPoint': '이슬점',
+    'visibility': '가시거리',
+    'windDir': '풍향',
+    'windSpeed': '풍속',
+    'windGust': '돌풍',
+    'sunrise': '일출',
+    'sunset': '일몰',
+
     'units': {
       'km/h': 'km/h',
       'm/s': 'm/s',
@@ -1579,6 +1803,15 @@ class WeatherChartCardEditor extends s {
           ></ha-switch>
           <label class="switch-label">
             E-Ink Display Mode (high contrast, bold text, no animations)
+          </label>
+        </div>
+        <div class="switch-container">
+          <ha-switch
+            @change="${(e) => this._valueChanged(e, 'show_attribute_labels')}"
+            .checked="${this._config.show_attribute_labels === true}"
+          ></ha-switch>
+          <label class="switch-label">
+            Show Attribute Labels (e.g. Humidity, Pressure, Wind)
           </label>
         </div>
       </div>
@@ -18157,6 +18390,7 @@ setConfig(config) {
     wind_unit_text_size: 9,
     last_updated_text_size: 13,
     eink_mode: false,
+    show_attribute_labels: false,
     show_feels_like: false,
     show_dew_point: false,
     show_wind_gust_speed: false,
@@ -19315,22 +19549,23 @@ renderAttributes({ config, humidity, pressure, windSpeed, windDirection, sun, la
   const showDewpoint = config.show_dew_point == true;
   const showWindgustspeed = config.show_wind_gust_speed == true;
   const showVisibility = config.show_visibility == true;
+  const showLabels = config.show_attribute_labels === true;
 
 return x`
     <div class="attributes">
       ${((showHumidity && humidity !== undefined) || (showPressure && dPressure !== undefined) || (showDewpoint && dew_point !== undefined) || (showVisibility && visibility !== undefined)) ? x`
         <div>
           ${showHumidity && humidity !== undefined ? x`
-            <ha-icon icon="hass:water-percent"></ha-icon> ${humidity} %<br>
+            <ha-icon icon="hass:water-percent"></ha-icon> ${showLabels ? x`${this.ll('humidity')}: ` : ''}${humidity} %<br>
           ` : ''}
           ${showPressure && dPressure !== undefined ? x`
-            <ha-icon icon="hass:gauge"></ha-icon> ${dPressure} ${this.ll('units')[this.unitPressure]} <br>
+            <ha-icon icon="hass:gauge"></ha-icon> ${showLabels ? x`${this.ll('pressure')}: ` : ''}${dPressure} ${this.ll('units')[this.unitPressure]} <br>
           ` : ''}
           ${showDewpoint && dew_point !== undefined ? x`
-            <ha-icon icon="hass:thermometer-water"></ha-icon> ${dew_point} ${this.weather.attributes.temperature_unit} <br>
+            <ha-icon icon="hass:thermometer-water"></ha-icon> ${showLabels ? x`${this.ll('dewPoint')}: ` : ''}${dew_point} ${this.weather.attributes.temperature_unit} <br>
           ` : ''}
           ${showVisibility && visibility !== undefined ? x`
-            <ha-icon icon="hass:eye"></ha-icon> ${visibility} ${this.weather.attributes.visibility_unit}
+            <ha-icon icon="hass:eye"></ha-icon> ${showLabels ? x`${this.ll('visibility')}: ` : ''}${visibility} ${this.weather.attributes.visibility_unit}
           ` : ''}
         </div>
       ` : ''}
@@ -19351,15 +19586,15 @@ return x`
       ${((showWindDirection && windDirection !== undefined) || (showWindSpeed && dWindSpeed !== undefined)) ? x`
         <div>
           ${showWindDirection && windDirection !== undefined ? x`
-            <ha-icon icon="hass:${this.getWindDirIcon(windDirection)}"></ha-icon> ${this.getWindDir(windDirection)} <br>
+            <ha-icon icon="hass:${this.getWindDirIcon(windDirection)}"></ha-icon> ${showLabels ? x`${this.ll('windDir')}: ` : ''}${this.getWindDir(windDirection)} <br>
           ` : ''}
           ${showWindSpeed && dWindSpeed !== undefined ? x`
             <ha-icon icon="hass:weather-windy"></ha-icon>
-            ${dWindSpeed} ${this.ll('units')[this.unitSpeed]} <br>
+            ${showLabels ? x`${this.ll('windSpeed')}: ` : ''}${dWindSpeed} ${this.ll('units')[this.unitSpeed]} <br>
           ` : ''}
           ${showWindgustspeed && wind_gust_speed !== undefined ? x`
             <ha-icon icon="hass:weather-windy-variant"></ha-icon>
-            ${wind_gust_speed} ${this.ll('units')[this.unitSpeed]}
+            ${showLabels ? x`${this.ll('windGust')}: ` : ''}${wind_gust_speed} ${this.ll('units')[this.unitSpeed]}
           ` : ''}
         </div>
       ` : ''}
@@ -19379,11 +19614,12 @@ const timeOptions = {
     minute: 'numeric'
 };
 
+  const showLabels = this.config.show_attribute_labels === true;
   return x`
     <ha-icon icon="mdi:weather-sunset-up"></ha-icon>
-      ${new Date(sun.attributes.next_rising).toLocaleTimeString(language, timeOptions)}<br>
+      ${showLabels ? x`${this.ll('sunrise')}: ` : ''}${new Date(sun.attributes.next_rising).toLocaleTimeString(language, timeOptions)}<br>
     <ha-icon icon="mdi:weather-sunset-down"></ha-icon>
-      ${new Date(sun.attributes.next_setting).toLocaleTimeString(language, timeOptions)}
+      ${showLabels ? x`${this.ll('sunset')}: ` : ''}${new Date(sun.attributes.next_setting).toLocaleTimeString(language, timeOptions)}
   `;
 }
 

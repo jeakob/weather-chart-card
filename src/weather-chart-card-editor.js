@@ -718,6 +718,15 @@ class WeatherChartCardEditor extends LitElement {
             E-Ink Display Mode (high contrast, bold text, no animations)
           </label>
         </div>
+        <div class="switch-container">
+          <ha-switch
+            @change="${(e) => this._valueChanged(e, 'show_attribute_labels')}"
+            .checked="${this._config.show_attribute_labels === true}"
+          ></ha-switch>
+          <label class="switch-label">
+            Show Attribute Labels (e.g. Humidity, Pressure, Wind)
+          </label>
+        </div>
       </div>
 
         <!-- Forecast Settings Page -->

@@ -109,6 +109,7 @@ setConfig(config) {
     wind_unit_text_size: 9,
     last_updated_text_size: 13,
     eink_mode: false,
+    show_attribute_labels: false,
     show_feels_like: false,
     show_dew_point: false,
     show_wind_gust_speed: false,
@@ -1267,22 +1268,23 @@ renderAttributes({ config, humidity, pressure, windSpeed, windDirection, sun, la
   const showDewpoint = config.show_dew_point == true;
   const showWindgustspeed = config.show_wind_gust_speed == true;
   const showVisibility = config.show_visibility == true;
+  const showLabels = config.show_attribute_labels === true;
 
 return html`
     <div class="attributes">
       ${((showHumidity && humidity !== undefined) || (showPressure && dPressure !== undefined) || (showDewpoint && dew_point !== undefined) || (showVisibility && visibility !== undefined)) ? html`
         <div>
           ${showHumidity && humidity !== undefined ? html`
-            <ha-icon icon="hass:water-percent"></ha-icon> ${humidity} %<br>
+            <ha-icon icon="hass:water-percent"></ha-icon> ${showLabels ? html`${this.ll('humidity')}: ` : ''}${humidity} %<br>
           ` : ''}
           ${showPressure && dPressure !== undefined ? html`
-            <ha-icon icon="hass:gauge"></ha-icon> ${dPressure} ${this.ll('units')[this.unitPressure]} <br>
+            <ha-icon icon="hass:gauge"></ha-icon> ${showLabels ? html`${this.ll('pressure')}: ` : ''}${dPressure} ${this.ll('units')[this.unitPressure]} <br>
           ` : ''}
           ${showDewpoint && dew_point !== undefined ? html`
-            <ha-icon icon="hass:thermometer-water"></ha-icon> ${dew_point} ${this.weather.attributes.temperature_unit} <br>
+            <ha-icon icon="hass:thermometer-water"></ha-icon> ${showLabels ? html`${this.ll('dewPoint')}: ` : ''}${dew_point} ${this.weather.attributes.temperature_unit} <br>
           ` : ''}
           ${showVisibility && visibility !== undefined ? html`
-            <ha-icon icon="hass:eye"></ha-icon> ${visibility} ${this.weather.attributes.visibility_unit}
+            <ha-icon icon="hass:eye"></ha-icon> ${showLabels ? html`${this.ll('visibility')}: ` : ''}${visibility} ${this.weather.attributes.visibility_unit}
           ` : ''}
         </div>
       ` : ''}
@@ -1303,15 +1305,15 @@ return html`
       ${((showWindDirection && windDirection !== undefined) || (showWindSpeed && dWindSpeed !== undefined)) ? html`
         <div>
           ${showWindDirection && windDirection !== undefined ? html`
-            <ha-icon icon="hass:${this.getWindDirIcon(windDirection)}"></ha-icon> ${this.getWindDir(windDirection)} <br>
+            <ha-icon icon="hass:${this.getWindDirIcon(windDirection)}"></ha-icon> ${showLabels ? html`${this.ll('windDir')}: ` : ''}${this.getWindDir(windDirection)} <br>
           ` : ''}
           ${showWindSpeed && dWindSpeed !== undefined ? html`
             <ha-icon icon="hass:weather-windy"></ha-icon>
-            ${dWindSpeed} ${this.ll('units')[this.unitSpeed]} <br>
+            ${showLabels ? html`${this.ll('windSpeed')}: ` : ''}${dWindSpeed} ${this.ll('units')[this.unitSpeed]} <br>
           ` : ''}
           ${showWindgustspeed && wind_gust_speed !== undefined ? html`
             <ha-icon icon="hass:weather-windy-variant"></ha-icon>
-            ${wind_gust_speed} ${this.ll('units')[this.unitSpeed]}
+            ${showLabels ? html`${this.ll('windGust')}: ` : ''}${wind_gust_speed} ${this.ll('units')[this.unitSpeed]}
           ` : ''}
         </div>
       ` : ''}
@@ -1331,11 +1333,12 @@ const timeOptions = {
     minute: 'numeric'
 };
 
+  const showLabels = this.config.show_attribute_labels === true;
   return html`
     <ha-icon icon="mdi:weather-sunset-up"></ha-icon>
-      ${new Date(sun.attributes.next_rising).toLocaleTimeString(language, timeOptions)}<br>
+      ${showLabels ? html`${this.ll('sunrise')}: ` : ''}${new Date(sun.attributes.next_rising).toLocaleTimeString(language, timeOptions)}<br>
     <ha-icon icon="mdi:weather-sunset-down"></ha-icon>
-      ${new Date(sun.attributes.next_setting).toLocaleTimeString(language, timeOptions)}
+      ${showLabels ? html`${this.ll('sunset')}: ` : ''}${new Date(sun.attributes.next_setting).toLocaleTimeString(language, timeOptions)}
   `;
 }
 

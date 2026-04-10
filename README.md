@@ -1,16 +1,9 @@
 <h1 align="center">Weather Chart Card</h1>
 
-# No Longer Maintained
-This repository is no longer maintained. Feel free to fork it if you find it useful.
-
-[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mlamberts7I)
-[![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=HZUUW64FRM2J2)
+> **Actively maintained fork** of [mlamberts78/weather-chart-card](https://github.com/mlamberts78/weather-chart-card), with e-ink display support, configurable font sizes, and other improvements.
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/mlamberts78/weather-chart-card?style=flat-square)](https://github.com/mlamberts78/weather-chart-card/releases/latest)
-![GitHub downloads](https://img.shields.io/github/downloads/mlamberts78/weather-chart-card/total?style=flat-square)
-![GitHub release (latest by SemVer including pre-releases)](https://img.shields.io/github/downloads/mlamberts78/weather-chart-card/latest/total)
-[![HACS Validate](https://github.com/mlamberts78/weather-chart-card/actions/workflows/validate.yaml/badge.svg)](https://github.com/mlamberts78/weather-chart-card/actions/workflows/validate.yaml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jeakob/weather-chart-card?style=flat-square)](https://github.com/jeakob/weather-chart-card/releases/latest)
 
 ![weather-chart-card](https://github.com/mlamberts78/weather-chart-card/assets/93537082/bd5b9f6e-4125-4a19-9773-463e6d054bce)
 ![15-days](https://github.com/mlamberts78/weather-chart-card/assets/93537082/f4de6060-7005-4a6d-b1f3-3aa17c856c73)
@@ -67,8 +60,15 @@ HACS is a third party community store and is not included in Home Assistant out 
 | icon_style            | string  | 'style1'                 | Options are 'style1' and'style2' for different set of animated icons.                              |
 | icons_size            | number  | 25                       | The size of the animated or custom icons in pixels.                                                |
 | current_temp_size     | number  | 28                       | The size of the current temperature in pixels.                                                     |
+| condition_text_size   | number  | 18                       | The size of the weather condition text in pixels.                                                  |
+| feels_like_text_size  | number  | 13                       | The size of the feels-like temperature text in pixels.                                             |
+| description_text_size | number  | 13                       | The size of the weather description text in pixels.                                                |
+| attributes_text_size  | number  | 14                       | The size of the attributes text (humidity, pressure, etc.) in pixels.                              |
+| attributes_icon_size  | number  | 24                       | The size of the attribute icons in pixels.                                                         |
 | time_size             | number  | 26                       | The size of the current time in pixels.                                                            |
 | day_date_size         | number  | 15                       | The size of the current day and date in pixels.                                                    |
+| show_attribute_labels | boolean | false                    | Show text labels next to attribute icons (e.g. "Humidity:", "Pressure:"). Translated to all supported languages. |
+| eink_mode             | boolean | false                    | E-ink display mode: high contrast, bold text, thicker chart lines, disabled animations.            |
 | forecast              | object  | none                     | See [forecast options](#forecast-options) for available options.                                   |
 | units                 | object  | none                     | See [units of measurement](#units-of-measurement) for available options.                           |
 | locale                | string  | none                     | See [Supported languages](#Supported-languages) for available languages                            |
@@ -88,6 +88,10 @@ HACS is a third party community store and is not included in Home Assistant out 
 | chart_datetime_color | string  | primary-text-color       | Chart day or hour color                                                                            |
 | chart_text_color     | string  | none                     | Chart text color                                                                                   |
 | chart_height         | number  | 180                      | Adjust the forecast chart height                                                                   |
+| precip_expand_height | number  | 0                        | Extra chart height (px) added when precipitation is in the forecast.                               |
+| chart_line_width     | number  | 1.5                      | Temperature line thickness in the chart.                                                           |
+| chart_point_radius   | number  | 2                        | Data point radius in the chart.                                                                    |
+| chart_ticks_text_size| number  | 14                       | Font size for chart x-axis (date/time) labels.                                                     |
 | condition_icons      | boolean | true                     | Show or hide forecast condition icons.                                                             |
 | show_wind_forecast   | boolean | true                     | Show or hide wind forecast on the card.                                                            |
 | round_temp           | boolean | false                    | Option for rounding the forecast temperatures                                                      |
@@ -176,3 +180,43 @@ units:
 | Swedish          | sv      |
 | Ukrainian        | uk      |
 | 한국어           | ko      |
+
+###### E-ink display example (Pimoroni Inky Impression 7.3")
+```yaml
+type: custom:weather-chart-card
+entity: weather.home
+eink_mode: true
+show_attribute_labels: true
+current_temp_size: 48
+condition_text_size: 28
+feels_like_text_size: 20
+attributes_text_size: 20
+attributes_icon_size: 30
+icons_size: 40
+forecast:
+  labels_font_size: 20
+  chart_ticks_text_size: 20
+  chart_height: 250
+  chart_line_width: 3
+  chart_point_radius: 4
+```
+
+## Changelog
+
+### v1.0.6
+- Added optional text labels for attribute icons (humidity, pressure, wind, etc.) with translations for all 23 supported languages
+- New `show_attribute_labels` toggle in the Card tab
+
+### v1.0.5
+- Added configurable attribute icon size (`attributes_icon_size`)
+
+### v1.0.4
+- Added configurable font sizes for condition text, feels-like, description, and attributes
+- Added configurable chart line width and point radius
+- Added configurable forecast condition icon size
+
+### v1.0.3
+- Added E-ink display mode (`eink_mode`) with high contrast, bold fonts, thicker chart lines, and auto-disabled animations
+- Fixed chart date label ("10 KWI") being cut off — added dynamic top padding
+- Fixed weather icon not scaling with `icons_size` setting
+- Added dynamic chart expansion when precipitation is present (`precip_expand_height`)
