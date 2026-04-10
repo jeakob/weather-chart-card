@@ -19416,43 +19416,30 @@ updateChart({ forecasts, forecastChart } = this) {
         }
         .daily-summary {
           display: flex;
-          justify-content: space-around;
-          gap: 6px;
+          justify-content: space-between;
           margin-top: 4px;
-          font-size: ${Math.max(parseInt(config.attributes_text_size) - 2, 10)}px;
+          font-size: ${config.attributes_text_size}px;
+          font-weight: 300;
         }
         .daily-summary-item {
-          flex: 1;
-          border: 1px solid var(--divider-color);
-          border-radius: 6px;
-          padding: 4px 6px;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-        .daily-summary-item .day-label {
-          font-weight: 700;
-          font-size: ${Math.max(parseInt(config.attributes_text_size) - 2, 10)}px;
-          min-width: fit-content;
-        }
-        .daily-summary-item .summary-info {
           display: flex;
           align-items: center;
           gap: 4px;
-          flex-wrap: wrap;
         }
-        .daily-summary-item .summary-temp {
-          font-weight: 700;
+        .daily-summary-item .day-label {
+          font-weight: 500;
         }
         .daily-summary-item img {
-          width: ${Math.max(parseInt(config.forecast.condition_icon_size) - 8, 14)}px;
-          height: ${Math.max(parseInt(config.forecast.condition_icon_size) - 8, 14)}px;
+          width: ${config.attributes_icon_size}px;
+          height: ${config.attributes_icon_size}px;
         }
         .daily-summary-item ha-icon {
-          --mdc-icon-size: ${Math.max(parseInt(config.forecast.condition_icon_size) - 8, 14)}px;
+          --mdc-icon-size: ${config.attributes_icon_size}px;
+        }
+        .daily-summary-item .summary-temp {
+          font-weight: 500;
         }
         .daily-summary-item .summary-condition {
-          font-style: italic;
           color: var(--secondary-text-color);
         }
         ${config.eink_mode ? `
@@ -19496,9 +19483,6 @@ updateChart({ forecasts, forecastChart } = this) {
         .current-time {
           font-weight: 600;
         }
-        .daily-summary-item {
-          border-color: #666 !important;
-        }
         ` : ''}
         ${config.eink_color_mode ? `
         ha-card {
@@ -19537,12 +19521,8 @@ updateChart({ forecasts, forecastChart } = this) {
         .current-time {
           font-weight: 600;
         }
-        .daily-summary-item {
-          border-color: #888 !important;
-          background: #f0f0f0 !important;
-        }
         .daily-summary-item .day-label {
-          color: #c03000 !important;
+          font-weight: 600 !important;
         }
         .custom-text-sensor {
           color: black !important;
