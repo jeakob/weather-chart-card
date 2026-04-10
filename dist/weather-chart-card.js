@@ -20065,8 +20065,8 @@ customElements.define('weather-chart-card', WeatherChartCard);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "weather-chart-card",
-  name: "Weather Chart Card",
-  description: "A custom weather card with chart.",
+  name: "E-Ink Weather Card",
+  description: "A weather card with chart, optimised for e-ink displays.",
   preview: true,
   documentationURL: "https://github.com/jeakob/weather-chart-card",
 });
