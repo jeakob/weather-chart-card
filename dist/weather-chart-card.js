@@ -1509,6 +1509,12 @@ class WeatherChartCardEditor extends s {
             @change="${(e) => this._valueChanged(e, 'attributes_text_size')}"
           ></ha-textfield>
           <ha-textfield
+            label="Attributes Icon Size"
+            type="number"
+            .value="${this._config.attributes_icon_size || '24'}"
+            @change="${(e) => this._valueChanged(e, 'attributes_icon_size')}"
+          ></ha-textfield>
+          <ha-textfield
             label="Wind Speed Text Size"
             type="number"
             .value="${this._config.wind_speed_text_size || '11'}"
@@ -18144,6 +18150,7 @@ setConfig(config) {
     feels_like_text_size: 13,
     description_text_size: 13,
     attributes_text_size: 14,
+    attributes_icon_size: 24,
     time_size: 26,
     day_date_size: 15,
     wind_speed_text_size: 11,
@@ -18983,6 +18990,9 @@ updateChart({ forecasts, forecastChart } = this) {
       	  font-weight: ${config.eink_mode ? '400' : '300'};
           font-size: ${config.attributes_text_size}px;
           direction: ltr;
+        }
+        .attributes ha-icon {
+          --mdc-icon-size: ${config.attributes_icon_size}px;
         }
         .chart-container {
           position: relative;

@@ -102,6 +102,7 @@ setConfig(config) {
     feels_like_text_size: 13,
     description_text_size: 13,
     attributes_text_size: 14,
+    attributes_icon_size: 24,
     time_size: 26,
     day_date_size: 15,
     wind_speed_text_size: 11,
@@ -941,6 +942,9 @@ updateChart({ forecasts, forecastChart } = this) {
       	  font-weight: ${config.eink_mode ? '400' : '300'};
           font-size: ${config.attributes_text_size}px;
           direction: ltr;
+        }
+        .attributes ha-icon {
+          --mdc-icon-size: ${config.attributes_icon_size}px;
         }
         .chart-container {
           position: relative;
