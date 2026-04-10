@@ -19417,46 +19417,43 @@ updateChart({ forecasts, forecastChart } = this) {
         .daily-summary {
           display: flex;
           justify-content: space-around;
-          gap: 8px;
-          margin-top: 8px;
+          gap: 6px;
+          margin-top: 4px;
+          font-size: ${Math.max(parseInt(config.attributes_text_size) - 2, 10)}px;
         }
         .daily-summary-item {
           flex: 1;
-          border: 2px solid var(--divider-color);
-          border-radius: 8px;
-          padding: 8px;
-          text-align: center;
-          font-size: ${Math.max(parseInt(config.attributes_text_size) - 2, 10)}px;
+          border: 1px solid var(--divider-color);
+          border-radius: 6px;
+          padding: 4px 6px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
         }
         .daily-summary-item .day-label {
           font-weight: 700;
-          margin-bottom: 4px;
-          font-size: ${parseInt(config.attributes_text_size)}px;
+          font-size: ${Math.max(parseInt(config.attributes_text_size) - 2, 10)}px;
+          min-width: fit-content;
         }
-        .daily-summary-item .summary-row {
+        .daily-summary-item .summary-info {
           display: flex;
           align-items: center;
-          justify-content: center;
           gap: 4px;
-          margin: 2px 0;
+          flex-wrap: wrap;
         }
         .daily-summary-item .summary-temp {
-          font-size: ${parseInt(config.current_temp_size) - 6}px;
           font-weight: 700;
         }
         .daily-summary-item img {
-          width: ${Math.max(parseInt(config.forecast.condition_icon_size) - 5, 15)}px;
-          height: ${Math.max(parseInt(config.forecast.condition_icon_size) - 5, 15)}px;
+          width: ${Math.max(parseInt(config.forecast.condition_icon_size) - 8, 14)}px;
+          height: ${Math.max(parseInt(config.forecast.condition_icon_size) - 8, 14)}px;
         }
         .daily-summary-item ha-icon {
-          --mdc-icon-size: ${Math.max(parseInt(config.forecast.condition_icon_size) - 5, 15)}px;
+          --mdc-icon-size: ${Math.max(parseInt(config.forecast.condition_icon_size) - 8, 14)}px;
         }
         .daily-summary-item .summary-condition {
           font-style: italic;
-          font-size: ${Math.max(parseInt(config.attributes_text_size) - 3, 9)}px;
-        }
-        .daily-summary-item .summary-wind {
-          font-size: ${Math.max(parseInt(config.attributes_text_size) - 3, 9)}px;
+          color: var(--secondary-text-color);
         }
         ${config.eink_mode ? `
         ha-card {
@@ -19973,9 +19970,9 @@ renderDailySummary({ config, sun } = this) {
     if (!forecast) return x``;
     const condition = forecast.condition;
     const tempHi = forecast.temperature !== undefined ? Math.round(forecast.temperature) : '?';
-    const tempLo = forecast.templow !== undefined ? Math.round(forecast.templow) : null;
-    const windSpeed = forecast.wind_speed !== undefined ? Math.round(forecast.wind_speed) : null;
-    const windUnit = this.ll('units')[this.unitSpeed];
+    forecast.templow !== undefined ? Math.round(forecast.templow) : null;
+    forecast.wind_speed !== undefined ? Math.round(forecast.wind_speed) : null;
+    this.ll('units')[this.unitSpeed];
 
     let iconHtml;
     if (config.animated_icons || config.icons) {
@@ -19991,22 +19988,11 @@ renderDailySummary({ config, sun } = this) {
     return x`
       <div class="daily-summary-item">
         <div class="day-label">${label}</div>
-        <div class="summary-row">
+        <div class="summary-info">
           <span class="summary-temp">${tempHi}°</span>
           ${iconHtml}
+          <span class="summary-condition">${this.ll(condition)}</span>
         </div>
-        ${tempLo !== null ? x`
-          <div class="summary-row">
-            <span>${this.ll('tempLo')}: ${tempLo}°</span>
-          </div>
-        ` : ''}
-        ${windSpeed !== null ? x`
-          <div class="summary-wind">
-            <ha-icon icon="hass:weather-windy" style="--mdc-icon-size: 14px;"></ha-icon>
-            ${windSpeed} ${windUnit}
-          </div>
-        ` : ''}
-        <div class="summary-condition">${this.ll(condition)}</div>
       </div>
     `;
   };
