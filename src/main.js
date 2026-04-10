@@ -185,8 +185,8 @@ setConfig(config) {
   }
 
   this.baseIconPath = cardConfig.icon_style === 'style2' ?
-    'https://cdn.jsdelivr.net/gh/jeakob/weather-chart-card/dist/icons2/':
-    'https://cdn.jsdelivr.net/gh/jeakob/weather-chart-card/dist/icons/' ;
+    'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons2/':
+    'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons/' ;
 
   this.config = cardConfig;
   if (!config.entity) {
@@ -1715,5 +1715,5 @@ window.customCards.push({
   name: "E-Ink Weather Card",
   description: "A weather card with chart, optimised for e-ink displays.",
   preview: true,
-  documentationURL: "https://github.com/jeakob/weather-chart-card",
+  documentationURL: "https://github.com/jeakob/E-Ink-Weather-Card",
 });

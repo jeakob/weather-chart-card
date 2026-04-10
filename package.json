@@ -11,7 +11,7 @@
     "custom-cards"
   ],
   "module": "src/main.js",
-  "repository": "git@github.com:jeakob/weather-chart-card.git",
+  "repository": "git@github.com:jeakob/E-Ink-Weather-Card.git",
   "author": "Marc Lamberts",
   "license": "MIT",
   "dependencies": {

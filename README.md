@@ -3,7 +3,7 @@
 > A Home Assistant weather card optimised for e-ink displays, based on [mlamberts78/weather-chart-card](https://github.com/mlamberts78/weather-chart-card). Features configurable font sizes, e-ink colour modes, daily summaries, and full translation support.
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jeakob/weather-chart-card?style=flat-square)](https://github.com/jeakob/weather-chart-card/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jeakob/weather-chart-card?style=flat-square)](https://github.com/jeakob/E-Ink-Weather-Card/releases/latest)
 
 ![weather-chart-card](https://github.com/mlamberts78/weather-chart-card/assets/93537082/bd5b9f6e-4125-4a19-9773-463e6d054bce)
 ![15-days](https://github.com/mlamberts78/weather-chart-card/assets/93537082/f4de6060-7005-4a6d-b1f3-3aa17c856c73)
@@ -108,7 +108,7 @@ HACS is a third party community store and is not included in Home Assistant out 
 | speed                | string  | none                     | Convert to 'km/h' or 'm/s' or 'Bft' or 'mph'                                                       |
 
 ###### What custom icons can I use?
-Icons should be in svg format. Icons should have names as shown [here](https://github.com/jeakob/weather-chart-card/blob/master/src/const.js#L24). Example:
+Icons should be in svg format. Icons should have names as shown [here](https://github.com/jeakob/E-Ink-Weather-Card/blob/master/src/const.js#L24). Example:
 ![130360372-76d70c42-986c-46e3-b9b5-810f0317f94f](https://github.com/mlamberts78/weather-chart-card/assets/93537082/d3ee55a2-e64f-4354-b36d-9faf6ea37361)
 
 #### Example usage:
