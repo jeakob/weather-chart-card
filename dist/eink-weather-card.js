@@ -19104,8 +19104,24 @@ drawChart({ config, language, weather, forecastItems } = this) {
         TempAxis: {
           position: 'left',
           beginAtZero: false,
-          suggestedMin: Math.min(...data.tempHigh, ...data.tempLow) - 5,
-          suggestedMax: Math.max(...data.tempHigh, ...data.tempLow) + 3,
+          suggestedMin: (() => {
+            const tempMin = Math.min(...data.tempHigh, ...data.tempLow);
+            const tempMax = Math.max(...data.tempHigh, ...data.tempLow);
+            const tempRange = tempMax - tempMin;
+            const fontSize = parseInt(config.forecast.labels_font_size);
+            const minRange = fontSize * 1.5;
+            const padding = tempRange < minRange ? (minRange - tempRange) / 2 + 5 : 5;
+            return tempMin - padding;
+          })(),
+          suggestedMax: (() => {
+            const tempMin = Math.min(...data.tempHigh, ...data.tempLow);
+            const tempMax = Math.max(...data.tempHigh, ...data.tempLow);
+            const tempRange = tempMax - tempMin;
+            const fontSize = parseInt(config.forecast.labels_font_size);
+            const minRange = fontSize * 1.5;
+            const padding = tempRange < minRange ? (minRange - tempRange) / 2 + 3 : 3;
+            return tempMax + padding;
+          })(),
           grid: {
             display: false,
             drawTicks: false,
