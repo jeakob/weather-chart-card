@@ -19279,8 +19279,27 @@ updateChart({ forecasts, forecastChart } = this) {
         .main {
           display: flex;
           align-items: center;
+          justify-content: space-between;
           font-size: ${config.current_temp_size}px;
           margin-bottom: 10px;
+        }
+        .main-left {
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+        }
+        .main-center {
+          flex: 1;
+          text-align: center;
+          font-size: ${config.attributes_text_size}px;
+          font-weight: 400;
+          line-height: 1.3;
+          padding: 0 12px;
+          color: var(--primary-text-color);
+        }
+        .main-right {
+          flex-shrink: 0;
+          text-align: right;
         }
         .main ha-icon {
           --mdc-icon-size: ${config.icons_size * 2}px;
@@ -19377,11 +19396,6 @@ updateChart({ forecasts, forecastChart } = this) {
           margin-inline-end: initial;
         }
         .current-time {
-          position: absolute;
-          top: 20px;
-          right: 16px;
-          inset-inline-start: initial;
-          inset-inline-end: 16px;
           font-size: ${config.time_size}px;
         }
         .date-text {
@@ -19406,11 +19420,7 @@ updateChart({ forecasts, forecastChart } = this) {
           margin-bottom: 1px;
         }
         .custom-text-sensor {
-          text-align: center;
-          font-size: ${config.attributes_text_size}px;
           font-weight: 400;
-          margin-bottom: 8px;
-          color: var(--primary-text-color);
         }
         .daily-summary {
           display: flex;
@@ -19532,7 +19542,6 @@ updateChart({ forecasts, forecastChart } = this) {
       <ha-card header="${config.title}">
         <div class="card">
           ${this.renderMain()}
-          ${this.renderCustomTextSensor()}
           ${this.renderAttributes()}
           <div class="chart-container">
             <canvas id="forecastChart"></canvas>
@@ -19624,36 +19633,43 @@ renderMain({ config, sun, weather, temperature, feels_like, description } = this
 
   return x`
     <div class="main">
-      ${iconHtml}
-      <div>
+      <div class="main-left">
+        ${iconHtml}
         <div>
-          ${showTemperature ? x`${roundedTemperature}<span>${this.getUnit('temperature')}</span>` : ''}
-          ${showFeelsLike && roundedFeelsLike ? x`
-            <div class="feels-like">
-              ${this.ll('feelsLike')}
-              ${roundedFeelsLike}${this.getUnit('temperature')}
-            </div>
-          ` : ''}
-          ${showCurrentCondition ? x`
-            <div class="current-condition">
-              <span>${this.ll(weather.state)}</span>
-            </div>
-          ` : ''}
-          ${showDescription ? x`
-            <div class="description">
-              ${description}
-            </div>
-          ` : ''}
+          <div>
+            ${showTemperature ? x`${roundedTemperature}<span>${this.getUnit('temperature')}</span>` : ''}
+            ${showFeelsLike && roundedFeelsLike ? x`
+              <div class="feels-like">
+                ${this.ll('feelsLike')}
+                ${roundedFeelsLike}${this.getUnit('temperature')}
+              </div>
+            ` : ''}
+            ${showCurrentCondition ? x`
+              <div class="current-condition">
+                <span>${this.ll(weather.state)}</span>
+              </div>
+            ` : ''}
+            ${showDescription ? x`
+              <div class="description">
+                ${description}
+              </div>
+            ` : ''}
+          </div>
         </div>
-        ${showTime ? x`
+      </div>
+      <div class="main-center">
+        ${this.renderCustomTextSensor()}
+      </div>
+      ${showTime ? x`
+        <div class="main-right">
           <div class="current-time">
             <div id="digital-clock"></div>
             ${showDay ? x`<div class="date-text day"></div>` : ''}
             ${showDay && showDate ? x` ` : ''}
             ${showDate ? x`<div class="date-text date"></div>` : ''}
           </div>
-        ` : ''}
-      </div>
+        </div>
+      ` : ''}
     </div>
   `;
 }
