@@ -1,5 +1,3 @@
-'use strict';
-
 const locale = {
   cs: {
     'tempHi': 'Teplota',

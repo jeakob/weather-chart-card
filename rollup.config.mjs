@@ -18,8 +18,7 @@ export default {
   input: 'src/main.js',
   output: {
     file: 'dist/eink-weather-card.js',
-    format: 'cjs',
-    name: 'EinkWeatherCard',
+    format: 'es',
     sourcemap: dev ? true : false,
   },
   plugins: [
