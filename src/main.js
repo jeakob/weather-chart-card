@@ -171,8 +171,8 @@ setConfig(config) {
   }
 
   this.baseIconPath = cardConfig.icon_style === 'style2' ?
-    'https://cdn.jsdelivr.net/gh/mlamberts78/weather-chart-card/dist/icons2/':
-    'https://cdn.jsdelivr.net/gh/mlamberts78/weather-chart-card/dist/icons/' ;
+    'https://cdn.jsdelivr.net/gh/jeakob/weather-chart-card/dist/icons2/':
+    'https://cdn.jsdelivr.net/gh/jeakob/weather-chart-card/dist/icons/' ;
 
   this.config = cardConfig;
   if (!config.entity) {
@@ -1518,5 +1518,5 @@ window.customCards.push({
   name: "Weather Chart Card",
   description: "A custom weather card with chart.",
   preview: true,
-  documentationURL: "https://github.com/mlamberts78/weather-chart-card",
+  documentationURL: "https://github.com/jeakob/weather-chart-card",
 });
