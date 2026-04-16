@@ -260,57 +260,37 @@ subscribeForecastEvents() {
 
   constructor() {
     super();
-    this.resizeObserver = null;
-    this.resizeInitialized = false;
+    this._boundWindowResize = null;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.resizeInitialized) {
-      this.delayedAttachResizeObserver();
+    if (!this._boundWindowResize) {
+      this._resizeTimeout = null;
+      this._boundWindowResize = () => {
+        if (this._resizeTimeout) clearTimeout(this._resizeTimeout);
+        this._resizeTimeout = setTimeout(() => this.measureCard(), 300);
+      };
+      window.addEventListener('resize', this._boundWindowResize);
     }
-  }
-
-  delayedAttachResizeObserver() {
-    setTimeout(() => {
-      this.attachResizeObserver();
-      this.resizeInitialized = true;
-    }, 0);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.detachResizeObserver();
+    if (this._boundWindowResize) {
+      window.removeEventListener('resize', this._boundWindowResize);
+      this._boundWindowResize = null;
+    }
+    if (this._resizeTimeout) {
+      clearTimeout(this._resizeTimeout);
+      this._resizeTimeout = null;
+    }
     if (this._clockInterval) {
       clearInterval(this._clockInterval);
       this._clockInterval = null;
     }
     if (this.forecastSubscriber) {
       this.forecastSubscriber.then((unsub) => unsub());
-    }
-  }
-
-  attachResizeObserver() {
-    this._lastMeasuredWidth = 0;
-    this._resizeTimeout = null;
-    this.resizeObserver = new ResizeObserver((entries) => {
-      const width = Math.round(entries[0].contentRect.width);
-      if (width > 0 && Math.abs(width - this._lastMeasuredWidth) > 10) {
-        this._lastMeasuredWidth = width;
-        if (this._resizeTimeout) clearTimeout(this._resizeTimeout);
-        this._resizeTimeout = setTimeout(() => this.measureCard(), 300);
-      }
-    });
-    const card = this.shadowRoot.querySelector('ha-card');
-    if (card) {
-      this.resizeObserver.observe(card);
-    }
-  }
-
-  detachResizeObserver() {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-      this.resizeObserver = null;
     }
   }
 
