@@ -291,13 +291,14 @@ subscribeForecastEvents() {
   }
 
   attachResizeObserver() {
-    this._lastCardWidth = 0;
+    this._lastMeasuredWidth = 0;
+    this._resizeTimeout = null;
     this.resizeObserver = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      const width = Math.round(entry.contentRect.width);
-      if (width > 0 && width !== this._lastCardWidth) {
-        this._lastCardWidth = width;
-        this.measureCard();
+      const width = Math.round(entries[0].contentRect.width);
+      if (width > 0 && Math.abs(width - this._lastMeasuredWidth) > 10) {
+        this._lastMeasuredWidth = width;
+        if (this._resizeTimeout) clearTimeout(this._resizeTimeout);
+        this._resizeTimeout = setTimeout(() => this.measureCard(), 300);
       }
     });
     const card = this.shadowRoot.querySelector('ha-card');
