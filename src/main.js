@@ -581,6 +581,8 @@ drawChart({ config, language, weather, forecastItems } = this) {
   Chart.defaults.elements.point.radius = parseFloat(config.forecast.chart_point_radius);
   Chart.defaults.elements.point.hitRadius = 10;
 
+  const chart_text_color = (config.forecast.chart_text_color === 'auto') ? textColor : config.forecast.chart_text_color;
+
   var datasets = [
     {
       label: this.ll('tempHi'),
@@ -628,20 +630,24 @@ drawChart({ config, language, weather, forecastItems } = this) {
           formattedValue = `${rainfall > 9 ? Math.round(rainfall) : rainfall.toFixed(1)} ${precipUnit}`;
         }
 
-        formattedValue = formattedValue.replace('\n', '\n\n');
-
         return formattedValue;
       },
         textAlign: 'center',
-        textBaseline: 'middle',
-        align: 'top',
-        anchor: 'start',
-        offset: -10,
+        align: 'bottom',
+        anchor: 'end',
+        offset: 2,
+        color: chart_text_color || textColor,
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        borderWidth: 0,
+        font: {
+          size: Math.max(8, parseInt(config.forecast.labels_font_size) - 2),
+          weight: (config.eink_mode || config.eink_color_mode) ? 'bold' : 'normal',
+          lineHeight: 1.2,
+        },
       },
     },
   ];
-
-  const chart_text_color = (config.forecast.chart_text_color === 'auto') ? textColor : config.forecast.chart_text_color;
 
   if (config.forecast.style === 'style2') {
     datasets[0].datalabels = {
