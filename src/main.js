@@ -281,14 +281,24 @@ subscribeForecastEvents() {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.detachResizeObserver();
+    if (this._clockInterval) {
+      clearInterval(this._clockInterval);
+      this._clockInterval = null;
+    }
     if (this.forecastSubscriber) {
       this.forecastSubscriber.then((unsub) => unsub());
     }
   }
 
   attachResizeObserver() {
-    this.resizeObserver = new ResizeObserver(() => {
-      this.measureCard();
+    this._lastCardWidth = 0;
+    this.resizeObserver = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      const width = Math.round(entry.contentRect.width);
+      if (width > 0 && width !== this._lastCardWidth) {
+        this._lastCardWidth = width;
+        this.measureCard();
+      }
     });
     const card = this.shadowRoot.querySelector('ha-card');
     if (card) {
@@ -1299,7 +1309,10 @@ renderMain({ config, sun, weather, temperature, feels_like, description } = this
   updateClock();
 
   if (showTime) {
-    setInterval(updateClock, 1000);
+    if (this._clockInterval) {
+      clearInterval(this._clockInterval);
+    }
+    this._clockInterval = setInterval(updateClock, 1000);
   }
 
   return html`
