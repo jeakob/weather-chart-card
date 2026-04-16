@@ -27,7 +27,8 @@ export default {
     copy({
       targets: [
         { src: 'src/icons/*', dest: 'dist/icons' },
-        { src: 'src/icons2/*', dest: 'dist/icons2' }
+        { src: 'src/icons2/*', dest: 'dist/icons2' },
+        { src: 'src/icons-eink-color/*', dest: 'dist/icons-eink-color' }
       ]
     })
   ],
