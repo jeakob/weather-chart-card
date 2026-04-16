@@ -18979,10 +18979,10 @@ drawChart({ config, language, weather, forecastItems } = this) {
         return formattedValue;
       },
         textAlign: 'center',
-        align: 'top',
-        anchor: 'end',
-        offset: 4,
-        color: chart_text_color || textColor,
+        align: 'bottom',
+        anchor: 'start',
+        offset: 2,
+        color: chart_text_color || config.forecast.precipitation_color,
         backgroundColor: 'transparent',
         borderColor: 'transparent',
         borderWidth: 0,
@@ -19048,7 +19048,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       layout: {
         padding: {
           top: parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) + 4,
-          bottom: 10,
+          bottom: hasPrecip ? parseInt(config.forecast.labels_font_size) * 2 + 10 : 10,
         },
       },
       scales: {
