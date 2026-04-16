@@ -5,8 +5,7 @@
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/jeakob/E-Ink-Weather-Card?style=flat-square)](https://github.com/jeakob/E-Ink-Weather-Card/releases/latest)
 
-![weather-chart-card](https://github.com/mlamberts78/weather-chart-card/assets/93537082/bd5b9f6e-4125-4a19-9773-463e6d054bce)
-![15-days](https://github.com/mlamberts78/weather-chart-card/assets/93537082/f4de6060-7005-4a6d-b1f3-3aa17c856c73)
+![eink-weather-card](docs/eink-weather-card.png)
 
 ## Installation
 

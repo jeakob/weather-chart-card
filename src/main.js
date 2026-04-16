@@ -186,12 +186,12 @@ setConfig(config) {
   }
 
   if (cardConfig.eink_color_mode) {
-    this.baseIconPath = 'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons-eink-color/';
+    this.baseIconPath = 'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card@master/dist/icons-eink-color/';
     cardConfig.animated_icons = true; // force image-based icons for eink color
   } else {
     this.baseIconPath = cardConfig.icon_style === 'style2' ?
-      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons2/':
-      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons/' ;
+      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card@master/dist/icons2/':
+      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card@master/dist/icons/' ;
   }
 
   this.config = cardConfig;
@@ -1097,6 +1097,7 @@ updateChart({ forecasts, forecastChart } = this) {
         .daily-summary {
           display: flex;
           justify-content: space-between;
+          align-items: center;
           margin-top: 4px;
           font-size: ${config.attributes_text_size}px;
           font-weight: 300;
@@ -1104,14 +1105,21 @@ updateChart({ forecasts, forecastChart } = this) {
         .daily-summary-item {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 6px;
         }
         .daily-summary-item .day-label {
           font-weight: 500;
+          margin-right: 2px;
+        }
+        .daily-summary-item .summary-info {
+          display: flex;
+          align-items: center;
+          gap: 4px;
         }
         .daily-summary-item img {
           width: ${config.attributes_icon_size}px;
           height: ${config.attributes_icon_size}px;
+          vertical-align: middle;
         }
         .daily-summary-item ha-icon {
           --mdc-icon-size: ${config.attributes_icon_size}px;

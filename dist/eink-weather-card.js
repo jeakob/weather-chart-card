@@ -1249,6 +1249,11 @@ class EinkWeatherCardEditor extends s {
       return;
     }
 
+    const target = event.target;
+    const tagName = target.tagName.toLowerCase();
+    const isToggle = tagName === 'ha-switch' || tagName === 'ha-checkbox';
+    const value = isToggle ? target.checked : target.value;
+
     let newConfig = { ...this._config };
 
     if (key.includes('.')) {
@@ -1257,24 +1262,13 @@ class EinkWeatherCardEditor extends s {
 
       for (let i = 0; i < parts.length - 1; i++) {
         const part = parts[i];
-
         currentLevel[part] = { ...currentLevel[part] };
-
         currentLevel = currentLevel[part];
       }
 
-      const finalKey = parts[parts.length - 1];
-      if (event.target.checked !== undefined) {
-        currentLevel[finalKey] = event.target.checked;
-      } else {
-        currentLevel[finalKey] = event.target.value;
-      }
+      currentLevel[parts[parts.length - 1]] = value;
     } else {
-      if (event.target.checked !== undefined) {
-        newConfig[key] = event.target.checked;
-      } else {
-        newConfig[key] = event.target.value;
-      }
+      newConfig[key] = value;
     }
 
     this.configChanged(newConfig);
@@ -1394,9 +1388,22 @@ class EinkWeatherCardEditor extends s {
           margin-left: 4px;
         }
 	div.buttons-container {
-          border-bottom: 2px solid #ccc;
+          display: flex;
+          gap: 8px;
           padding-bottom: 10px;
           margin-bottom: 20px;
+        }
+        div.buttons-container mwc-button {
+          --mdc-theme-primary: var(--primary-text-color);
+          --mdc-button-outline-color: var(--divider-color);
+          border: 1px solid var(--divider-color);
+          border-radius: 8px;
+          background: var(--card-background-color, var(--ha-card-background, #fff));
+        }
+        div.buttons-container mwc-button.active {
+          border-color: var(--primary-color);
+          background: var(--primary-color);
+          --mdc-theme-primary: #fff;
         }
         .flex-container {
           display: flex;
@@ -1484,10 +1491,10 @@ class EinkWeatherCardEditor extends s {
         <!-- Buttons to switch between pages -->
        <h4>Settings:</h4>
        <div class="buttons-container">
-         <mwc-button @click="${() => this.showPage('card')}">Main</mwc-button>
-         <mwc-button @click="${() => this.showPage('forecast')}">Forecast</mwc-button>
-         <mwc-button @click="${() => this.showPage('units')}">Units</mwc-button>
-         <mwc-button @click="${() => this.showPage('alternate')}">Alternate entities</mwc-button>
+         <mwc-button class="${this.currentPage === 'card' ? 'active' : ''}" @click="${() => this.showPage('card')}">Main</mwc-button>
+         <mwc-button class="${this.currentPage === 'forecast' ? 'active' : ''}" @click="${() => this.showPage('forecast')}">Forecast</mwc-button>
+         <mwc-button class="${this.currentPage === 'units' ? 'active' : ''}" @click="${() => this.showPage('units')}">Units</mwc-button>
+         <mwc-button class="${this.currentPage === 'alternate' ? 'active' : ''}" @click="${() => this.showPage('alternate')}">Alternate entities</mwc-button>
        </div>
 
         <!-- Card Settings Page -->
@@ -1707,39 +1714,37 @@ class EinkWeatherCardEditor extends s {
                 @change="${(e) => this._valueChanged(e, 'day_date_size')}"
               ></ha-textfield>
               </div>
-            <div class="icon-container">
+          <div class="switch-container">
+              <ha-switch
+                @change="${(e) => this._valueChanged(e, 'animated_icons')}"
+                .checked="${this._config.animated_icons === true}"
+              ></ha-switch>
+              <label class="switch-label">
+                Use Animated Icons
+              </label>
+          </div>
+          ${this._config.animated_icons ? x`
+            <div class="radio-container" style="margin-bottom: 12px; margin-left: 14px;">
               <div class="switch-right">
-                <ha-switch
-                  @change="${(e) => this._valueChanged(e, 'animated_icons')}"
-                  .checked="${this._config.animated_icons === true}"
-                ></ha-switch>
-                <label class="switch-label">
-                  Use Animated Icons
-                </label>
+                <ha-radio
+                  name="icon_style"
+                  value="style1"
+                  @change="${this._handleIconStyleChange}"
+                  .checked="${this._config.icon_style === 'style1'}"
+                ></ha-radio>
+                <label class="check-label">Style 1</label>
               </div>
-              <div class="switch-right radio-container" style="${this._config.animated_icons ? 'display: flex;' : 'display: none;'}">
-                  <ha-radio
-                    name="icon_style"
-                    value="style1"
-                    @change="${this._handleIconStyleChange}"
-                    .checked="${this._config.icon_style === 'style1'}"
-                  ></ha-radio>
-                  <label class="check-label">
-                    Style 1
-                  </label>
-                </div>
-              <div class="switch-right radio-container" style="${this._config.animated_icons ? 'display: flex;' : 'display: none;'}">
-                  <ha-radio
-                    name="icon_style"
-                    value="style2"
-                    @change="${this._handleIconStyleChange}"
-                    .checked="${this._config.icon_style === 'style2'}"
-                  ></ha-radio>
-                  <label class="check-label">
-                    Style 2
-                  </label>
-                </div>
+              <div class="switch-right">
+                <ha-radio
+                  name="icon_style"
+                  value="style2"
+                  @change="${this._handleIconStyleChange}"
+                  .checked="${this._config.icon_style === 'style2'}"
+                ></ha-radio>
+                <label class="check-label">Style 2</label>
               </div>
+            </div>
+          ` : ''}
        <div class="textfield-container">
          <ha-textfield
            label="Icon Size for animated or custom icons"
@@ -18537,12 +18542,12 @@ setConfig(config) {
   }
 
   if (cardConfig.eink_color_mode) {
-    this.baseIconPath = 'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons-eink-color/';
+    this.baseIconPath = 'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card@master/dist/icons-eink-color/';
     cardConfig.animated_icons = true; // force image-based icons for eink color
   } else {
     this.baseIconPath = cardConfig.icon_style === 'style2' ?
-      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons2/':
-      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card/dist/icons/' ;
+      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card@master/dist/icons2/':
+      'https://cdn.jsdelivr.net/gh/jeakob/E-Ink-Weather-Card@master/dist/icons/' ;
   }
 
   this.config = cardConfig;
@@ -19448,6 +19453,7 @@ updateChart({ forecasts, forecastChart } = this) {
         .daily-summary {
           display: flex;
           justify-content: space-between;
+          align-items: center;
           margin-top: 4px;
           font-size: ${config.attributes_text_size}px;
           font-weight: 300;
@@ -19455,14 +19461,21 @@ updateChart({ forecasts, forecastChart } = this) {
         .daily-summary-item {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 6px;
         }
         .daily-summary-item .day-label {
           font-weight: 500;
+          margin-right: 2px;
+        }
+        .daily-summary-item .summary-info {
+          display: flex;
+          align-items: center;
+          gap: 4px;
         }
         .daily-summary-item img {
           width: ${config.attributes_icon_size}px;
           height: ${config.attributes_icon_size}px;
+          vertical-align: middle;
         }
         .daily-summary-item ha-icon {
           --mdc-icon-size: ${config.attributes_icon_size}px;
