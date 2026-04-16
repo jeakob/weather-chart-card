@@ -18509,7 +18509,7 @@ setConfig(config) {
     // Pimoroni Inky Impression 7-color e-ink palette shades
     if (!config.forecast || !config.forecast.temperature1_color) cardConfig.forecast.temperature1_color = 'rgba(200, 80, 0, 1.0)';
     if (!config.forecast || !config.forecast.temperature2_color) cardConfig.forecast.temperature2_color = 'rgba(0, 60, 120, 1.0)';
-    if (!config.forecast || !config.forecast.precipitation_color) cardConfig.forecast.precipitation_color = 'rgba(0, 80, 160, 0.7)';
+    if (!config.forecast || !config.forecast.precipitation_color) cardConfig.forecast.precipitation_color = 'rgba(0, 0, 180, 1.0)';
     if (!config.forecast || !config.forecast.chart_line_width) cardConfig.forecast.chart_line_width = 2.5;
     if (!config.forecast || !config.forecast.chart_point_radius) cardConfig.forecast.chart_point_radius = 3;
   }
@@ -18533,6 +18533,7 @@ setConfig(config) {
     if (!config.forecast || !config.forecast.chart_line_width) cardConfig.forecast.chart_line_width = 3;
     if (!config.forecast || !config.forecast.chart_point_radius) cardConfig.forecast.chart_point_radius = 4;
     if (!config.forecast || !config.forecast.condition_icon_size) cardConfig.forecast.condition_icon_size = 35;
+    if (!config.forecast || !config.forecast.precipitation_color) cardConfig.forecast.precipitation_color = 'rgba(0, 0, 0, 0.8)';
   }
 
   this.baseIconPath = cardConfig.icon_style === 'style2' ?
