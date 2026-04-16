@@ -557,11 +557,14 @@ drawChart({ config, language, weather, forecastItems } = this) {
   if (config.forecast.precipitation_type === 'probability') {
     precipMax = 100;
   } else {
-    if (config.forecast.type === 'hourly') {
-      precipMax = lengthUnit === 'km' ? 4 : 1;
-    } else {
-      precipMax = lengthUnit === 'km' ? 20 : 1;
-    }
+    const defaultMax = config.forecast.type === 'hourly'
+      ? (lengthUnit === 'km' ? 4 : 1)
+      : (lengthUnit === 'km' ? 20 : 1);
+    const actualMax = Math.max(...(data.precip || [0]));
+    // Scale down precipMax so small values are still visible
+    // Bars should fill at least 15% of chart height
+    precipMax = actualMax > 0 ? Math.max(actualMax / 0.15, actualMax * 2) : defaultMax;
+    precipMax = Math.min(precipMax, defaultMax);
   }
 
   Chart.defaults.color = textColor;
