@@ -530,12 +530,13 @@ drawChart({ config, language, weather, forecastItems } = this) {
 
   // Expand chart height when precipitation is present
   const precipExpandHeight = parseInt(config.forecast.precip_expand_height) || 0;
-  const hasPrecip = precipExpandHeight > 0 && data.precip && data.precip.some(v => v > 0);
+  const hasPrecip = data.precip && data.precip.some(v => v > 0);
+  const fontSize = parseInt(config.forecast.labels_font_size);
+  // Auto-expand: add space for precip label + probability line if needed
+  const autoExpand = hasPrecip ? Math.max(precipExpandHeight, fontSize * 3) : 0;
   const chartContainer = this.renderRoot.querySelector('.chart-container');
   if (chartContainer) {
-    const effectiveHeight = hasPrecip
-      ? parseInt(config.forecast.chart_height) + precipExpandHeight
-      : parseInt(config.forecast.chart_height);
+    const effectiveHeight = parseInt(config.forecast.chart_height) + autoExpand;
     chartContainer.style.height = effectiveHeight + 'px';
   }
 
@@ -627,9 +628,9 @@ drawChart({ config, language, weather, forecastItems } = this) {
         return formattedValue;
       },
         textAlign: 'center',
-        align: 'bottom',
+        align: 'top',
         anchor: 'end',
-        offset: 2,
+        offset: 4,
         color: chart_text_color || textColor,
         backgroundColor: 'transparent',
         borderColor: 'transparent',
