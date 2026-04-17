@@ -19008,6 +19008,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       backgroundColor: config.forecast.precipitation_color,
       barPercentage: config.forecast.precip_bar_size / 100,
       categoryPercentage: 1.0,
+      maxBarThickness: 80,
       datalabels: {
         display: function (context) {
           return context.dataset.data[context.dataIndex] > 0 ? 'true' : false;
@@ -19106,6 +19107,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       },
       scales: {
         x: {
+          offset: true,
           position: 'top',
           border: {
             width: 0,
