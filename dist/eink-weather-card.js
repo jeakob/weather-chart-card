@@ -1873,6 +1873,15 @@ class EinkWeatherCardEditor extends s {
             Show Tomorrow & In 2 Days Summary
           </label>
         </div>
+        ${this._config.show_daily_summary ? x`
+          <ha-textfield
+            label="Daily Summary Text Size"
+            type="number"
+            .value="${this._config.daily_summary_text_size || '14'}"
+            @change="${(e) => this._valueChanged(e, 'daily_summary_text_size')}"
+            style="margin-bottom: 12px;"
+          ></ha-textfield>
+        ` : ''}
         <div class="switch-container">
           <ha-switch
             @change="${(e) => this._valueChanged(e, 'eink_color_mode')}"
@@ -18468,6 +18477,7 @@ setConfig(config) {
     eink_color_mode: false,
     show_attribute_labels: false,
     show_daily_summary: false,
+    daily_summary_text_size: 14,
     custom_text_sensor: '',
     show_feels_like: false,
     show_dew_point: false,
@@ -18538,7 +18548,10 @@ setConfig(config) {
     if (!config.forecast || !config.forecast.chart_line_width) cardConfig.forecast.chart_line_width = 3;
     if (!config.forecast || !config.forecast.chart_point_radius) cardConfig.forecast.chart_point_radius = 4;
     if (!config.forecast || !config.forecast.condition_icon_size) cardConfig.forecast.condition_icon_size = 35;
-    if (!config.forecast || !config.forecast.precipitation_color) cardConfig.forecast.precipitation_color = 'rgba(0, 0, 0, 0.8)';
+    // Don't override precipitation colour if eink_color_mode already set it
+    if (!cardConfig.eink_color_mode && (!config.forecast || !config.forecast.precipitation_color)) {
+      cardConfig.forecast.precipitation_color = 'rgba(0, 0, 0, 0.8)';
+    }
   }
 
   if (cardConfig.eink_color_mode) {
@@ -19476,7 +19489,7 @@ updateChart({ forecasts, forecastChart } = this) {
           justify-content: space-between;
           align-items: center;
           margin-top: 4px;
-          font-size: ${config.attributes_text_size}px;
+          font-size: ${config.daily_summary_text_size}px;
           font-weight: 300;
         }
         .daily-summary-item {

@@ -742,6 +742,15 @@ class EinkWeatherCardEditor extends LitElement {
             Show Tomorrow & In 2 Days Summary
           </label>
         </div>
+        ${this._config.show_daily_summary ? html`
+          <ha-textfield
+            label="Daily Summary Text Size"
+            type="number"
+            .value="${this._config.daily_summary_text_size || '14'}"
+            @change="${(e) => this._valueChanged(e, 'daily_summary_text_size')}"
+            style="margin-bottom: 12px;"
+          ></ha-textfield>
+        ` : ''}
         <div class="switch-container">
           <ha-switch
             @change="${(e) => this._valueChanged(e, 'eink_color_mode')}"
