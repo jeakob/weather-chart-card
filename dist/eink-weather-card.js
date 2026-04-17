@@ -19092,9 +19092,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       animation: config.forecast.disable_animation === true ? { duration: 0 } : {},
       layout: {
         padding: {
-          top: config.forecast.type === 'hourly'
-            ? parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) * 2 + 8
-            : parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) + 4,
+          top: parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) + 4,
           bottom: hasPrecip ? parseInt(config.forecast.labels_font_size) * 2 + 10 : 10,
         },
       },
@@ -19148,6 +19146,11 @@ drawChart({ config, language, weather, forecastItems } = this) {
               },
           },
           reverse: document.dir === 'rtl' ? true : false,
+          afterFit: config.forecast.type === 'hourly' ? function(axis) {
+            const tickSize = parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size);
+            const minHeight = tickSize * 2.8 + 10;
+            if (axis.height < minHeight) axis.height = minHeight;
+          } : undefined,
         },
         TempAxis: {
           position: 'left',

@@ -1,6 +1,6 @@
 {
   "name": "eink-weather-card",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "E-Ink optimised weather card with charts for Home Assistant Lovelace UI",
   "keywords": [
     "home-assistant",
