@@ -18944,6 +18944,13 @@ drawChart({ config, language, weather, forecastItems } = this) {
     chartContainer.style.height = effectiveHeight + 'px';
   }
 
+  // Compute a fixed integer bar thickness so all bars are pixel-perfect equal.
+  // Chart.js floating-point category division causes 1–2px rounding differences
+  // when barPercentage/categoryPercentage are used; a fixed thickness avoids this.
+  const chartContainerWidth = chartContainer ? chartContainer.offsetWidth : 300;
+  const numBars = data.dateTime.length || 1;
+  const barThickness = Math.max(4, Math.floor((chartContainerWidth / numBars) * (config.forecast.precip_bar_size / 100)));
+
   var style = getComputedStyle(document.body);
   const isEink = config.eink_mode || config.eink_color_mode;
   var backgroundColor = isEink ? 'white' : style.getPropertyValue('--card-background-color');
@@ -19006,9 +19013,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       yAxisID: 'PrecipAxis',
       borderColor: config.forecast.precipitation_color,
       backgroundColor: config.forecast.precipitation_color,
-      barPercentage: config.forecast.precip_bar_size / 100,
-      categoryPercentage: 1.0,
-      maxBarThickness: 80,
+      barThickness: barThickness,
       datalabels: {
         display: function (context) {
           return context.dataset.data[context.dataIndex] > 0 ? 'true' : false;
