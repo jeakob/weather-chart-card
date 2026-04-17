@@ -727,7 +727,9 @@ drawChart({ config, language, weather, forecastItems } = this) {
       animation: config.forecast.disable_animation === true ? { duration: 0 } : {},
       layout: {
         padding: {
-          top: parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) + 4,
+          top: config.forecast.type === 'hourly'
+            ? parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) * 2 + 8
+            : parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) + 4,
           bottom: hasPrecip ? parseInt(config.forecast.labels_font_size) * 2 + 10 : 10,
         },
       },
@@ -800,8 +802,8 @@ drawChart({ config, language, weather, forecastItems } = this) {
             const tempRange = tempMax - tempMin;
             const fontSize = parseInt(config.forecast.labels_font_size);
             const minRange = fontSize * 1.5;
-            const padding = tempRange < minRange ? (minRange - tempRange) / 2 + 3 : 3;
-            return tempMax + padding;
+            const basePad = tempRange < minRange ? (minRange - tempRange) / 2 + 3 : 3;
+            return tempMax + basePad;
           })(),
           grid: {
             display: false,
