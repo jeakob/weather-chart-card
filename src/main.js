@@ -572,13 +572,6 @@ drawChart({ config, language, weather, forecastItems } = this) {
     chartContainer.style.height = effectiveHeight + 'px';
   }
 
-  // Compute a fixed integer bar thickness so all bars are pixel-perfect equal.
-  // Chart.js floating-point category division causes 1–2px rounding differences
-  // when barPercentage/categoryPercentage are used; a fixed thickness avoids this.
-  const chartContainerWidth = chartContainer ? chartContainer.offsetWidth : 300;
-  const numBars = data.dateTime.length || 1;
-  const barThickness = Math.max(4, Math.floor((chartContainerWidth / numBars) * (config.forecast.precip_bar_size / 100)));
-
   var style = getComputedStyle(document.body);
   const isEink = config.eink_mode || config.eink_color_mode;
   var backgroundColor = isEink ? 'white' : style.getPropertyValue('--card-background-color');
@@ -641,7 +634,8 @@ drawChart({ config, language, weather, forecastItems } = this) {
       yAxisID: 'PrecipAxis',
       borderColor: config.forecast.precipitation_color,
       backgroundColor: config.forecast.precipitation_color,
-      barThickness: barThickness,
+      barPercentage: config.forecast.precip_bar_size / 100,
+      categoryPercentage: 0.9,
       datalabels: {
         display: function (context) {
           return context.dataset.data[context.dataIndex] > 0 ? 'true' : false;
@@ -919,9 +913,9 @@ computeForecastData({ config, forecastItems } = this) {
       }
     }
     if (config.forecast.precipitation_type === 'probability') {
-      precip.push(d.precipitation_probability);
+      precip.push(d.precipitation_probability > 0 ? d.precipitation_probability : null);
     } else {
-      precip.push(d.precipitation);
+      precip.push(d.precipitation > 0 ? d.precipitation : null);
     }
   }
 
