@@ -18514,7 +18514,7 @@ setConfig(config) {
     // Pimoroni Inky Impression 7-color e-ink palette shades
     if (!config.forecast || !config.forecast.temperature1_color) cardConfig.forecast.temperature1_color = 'rgba(200, 80, 0, 1.0)';
     if (!config.forecast || !config.forecast.temperature2_color) cardConfig.forecast.temperature2_color = 'rgba(0, 60, 120, 1.0)';
-    if (!config.forecast || !config.forecast.precipitation_color) cardConfig.forecast.precipitation_color = 'rgba(0, 70, 255, 1.0)';
+    if (!config.forecast || !config.forecast.precipitation_color) cardConfig.forecast.precipitation_color = 'rgba(30, 120, 255, 1.0)';
     if (!config.forecast || !config.forecast.chart_line_width) cardConfig.forecast.chart_line_width = 2.5;
     if (!config.forecast || !config.forecast.chart_point_radius) cardConfig.forecast.chart_point_radius = 3;
   }
@@ -18614,6 +18614,19 @@ subscribeForecastEvents() {
     forecast_type: isHourly ? 'hourly' : 'daily',
     entity_id: this.config.entity,
   });
+
+  // Subscribe to daily forecasts separately for the daily summary when in hourly mode
+  if (isHourly && this.config.show_daily_summary && this.supportsFeature(WeatherEntityFeature.FORECAST_DAILY)) {
+    const dailyCallback = (event) => {
+      this.dailyForecasts = event.forecast;
+      this.requestUpdate();
+    };
+    this.dailyForecastSubscriber = this._hass.connection.subscribeMessage(dailyCallback, {
+      type: "weather/subscribe_forecast",
+      forecast_type: 'daily',
+      entity_id: this.config.entity,
+    });
+  }
 }
 
   supportsFeature(feature) {
@@ -18653,6 +18666,9 @@ subscribeForecastEvents() {
     }
     if (this.forecastSubscriber) {
       this.forecastSubscriber.then((unsub) => unsub());
+    }
+    if (this.dailyForecastSubscriber) {
+      this.dailyForecastSubscriber.then((unsub) => unsub());
     }
   }
 
@@ -18814,6 +18830,11 @@ async updated(changedProperties) {
     if (entityChanged || forecastTypeChanged) {
       if (this.forecastSubscriber && typeof this.forecastSubscriber === 'function') {
         this.forecastSubscriber();
+      }
+      if (this.dailyForecastSubscriber) {
+        this.dailyForecastSubscriber.then((unsub) => unsub());
+        this.dailyForecastSubscriber = null;
+        this.dailyForecasts = null;
       }
 
       this.subscribeForecastEvents();
@@ -19970,9 +19991,15 @@ renderWind({ config, weather, windSpeed, windDirection, forecastItems } = this) 
 
 renderDailySummary({ config, sun } = this) {
   if (config.show_daily_summary !== true) return x``;
-  if (!this.forecasts || !this.forecasts.length) return x``;
 
-  // Need daily forecasts - find tomorrow and day after
+  // Use dedicated daily forecasts when available (e.g. when chart is in hourly mode)
+  const summaryForecasts = this.dailyForecasts && this.dailyForecasts.length
+    ? this.dailyForecasts
+    : this.forecasts;
+
+  if (!summaryForecasts || !summaryForecasts.length) return x``;
+
+  // Find tomorrow and day after from daily forecasts
   const now = new Date();
   const tomorrow = new Date(now);
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -19984,7 +20011,7 @@ renderDailySummary({ config, sun } = this) {
   let tomorrowForecast = null;
   let dayAfterForecast = null;
 
-  for (const f of this.forecasts) {
+  for (const f of summaryForecasts) {
     const fDate = new Date(f.datetime);
     fDate.setHours(0,0,0,0);
     if (!tomorrowForecast && fDate.getTime() === tomorrow.getTime()) {
@@ -19995,9 +20022,9 @@ renderDailySummary({ config, sun } = this) {
     if (tomorrowForecast && dayAfterForecast) break;
   }
 
-  // Fallback: use first two forecasts if daily matching fails (e.g. hourly mode)
-  if (!tomorrowForecast && this.forecasts.length > 0) tomorrowForecast = this.forecasts[0];
-  if (!dayAfterForecast && this.forecasts.length > 1) dayAfterForecast = this.forecasts[1];
+  // Fallback: use first two forecasts if matching fails
+  if (!tomorrowForecast && summaryForecasts.length > 0) tomorrowForecast = summaryForecasts[0];
+  if (!dayAfterForecast && summaryForecasts.length > 1) dayAfterForecast = summaryForecasts[1];
 
   const renderSummaryItem = (forecast, label) => {
     if (!forecast) return x``;
