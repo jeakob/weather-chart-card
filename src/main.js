@@ -113,6 +113,7 @@ setConfig(config) {
     show_attribute_labels: false,
     show_daily_summary: false,
     daily_summary_text_size: 14,
+    daily_summary_icon_size: 30,
     custom_text_sensor: '',
     show_feels_like: false,
     show_dew_point: false,
@@ -727,7 +728,7 @@ drawChart({ config, language, weather, forecastItems } = this) {
       animation: config.forecast.disable_animation === true ? { duration: 0 } : {},
       layout: {
         padding: {
-          top: parseInt(config.forecast.chart_ticks_text_size || config.forecast.labels_font_size) + 4,
+          top: 0,
           bottom: hasPrecip ? parseInt(config.forecast.labels_font_size) * 2 + 10 : 10,
         },
       },
@@ -1106,8 +1107,15 @@ updateChart({ forecasts, forecastChart } = this) {
         }
         .main .feels-like {
           font-size: ${config.feels_like_text_size}px;
-          margin-top: 5px;
+          margin-top: 0px;
           font-weight: 400;
+        }
+        .main .current-condition {
+          margin-top: 5px;
+        }
+        .main .current-temperature {
+          line-height: 0.8;
+          margin-bottom: 2px;
         }
         .main .description {
 	  font-style: italic;
@@ -1149,12 +1157,12 @@ updateChart({ forecasts, forecastChart } = this) {
           gap: 4px;
         }
         .daily-summary-item img {
-          width: ${config.attributes_icon_size}px;
-          height: ${config.attributes_icon_size}px;
+          width: ${config.daily_summary_icon_size}px;
+          height: ${config.daily_summary_icon_size}px;
           vertical-align: middle;
         }
         .daily-summary-item ha-icon {
-          --mdc-icon-size: ${config.attributes_icon_size}px;
+          --mdc-icon-size: ${config.daily_summary_icon_size}px;
         }
         .daily-summary-item .summary-temp {
           font-weight: 500;
@@ -1184,7 +1192,7 @@ updateChart({ forecasts, forecastChart } = this) {
         .attributes {
           font-weight: 400 !important;
         }
-        .attributes ha-icon {
+        .attributes ha-icon, .main ha-icon, .daily-summary-item ha-icon, .wind-detail ha-icon {
           color: black !important;
         }
         .wind-details {
@@ -1228,7 +1236,7 @@ updateChart({ forecasts, forecastChart } = this) {
         .attributes {
           font-weight: 400 !important;
         }
-        .attributes ha-icon {
+        .attributes ha-icon, .main ha-icon, .daily-summary-item ha-icon, .wind-detail ha-icon {
           color: #222 !important;
         }
         .wind-details {
@@ -1352,7 +1360,7 @@ renderMain({ config, sun, weather, temperature, feels_like, description } = this
         ${iconHtml}
         <div>
           <div>
-            ${showTemperature ? html`${roundedTemperature}<span>${this.getUnit('temperature')}</span>` : ''}
+            ${showTemperature ? html`<div class="current-temperature">${roundedTemperature}<span>${this.getUnit('temperature')}</span></div>` : ''}
             ${showFeelsLike && roundedFeelsLike ? html`
               <div class="feels-like">
                 ${this.ll('feelsLike')}

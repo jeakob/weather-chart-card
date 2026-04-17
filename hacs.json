@@ -1,5 +1,6 @@
 {
   "name": "E-Ink Weather Card",
   "render_readme": true,
-  "filename": "eink-weather-card.js"
+  "filename": "eink-weather-card.js",
+  "image": "docs/eink-weather-card.png"
 }

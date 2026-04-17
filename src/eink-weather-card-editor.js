@@ -750,6 +750,13 @@ class EinkWeatherCardEditor extends LitElement {
             @change="${(e) => this._valueChanged(e, 'daily_summary_text_size')}"
             style="margin-bottom: 12px;"
           ></ha-textfield>
+          <ha-textfield
+            label="Daily Summary Icon Size"
+            type="number"
+            .value="${this._config.daily_summary_icon_size || '30'}"
+            @change="${(e) => this._valueChanged(e, 'daily_summary_icon_size')}"
+            style="margin-bottom: 12px;"
+          ></ha-textfield>
         ` : ''}
         <div class="switch-container">
           <ha-switch
