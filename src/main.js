@@ -1128,7 +1128,9 @@ updateChart({ forecasts, forecastChart } = this) {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-top: 4px;
+          margin-top: 8px;
+          padding-top: 8px;
+          border-top: 1px solid var(--divider-color, #e0e0e0);
           font-size: ${config.daily_summary_text_size}px;
           font-weight: 300;
         }
