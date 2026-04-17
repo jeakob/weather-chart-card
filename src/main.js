@@ -330,6 +330,10 @@ measureCard() {
     return;
   }
 
+  // Store chart container width here where layout is guaranteed
+  const chartContainer = this.shadowRoot.querySelector('.chart-container');
+  this.chartContainerWidth = chartContainer ? chartContainer.offsetWidth : Math.max(0, card.offsetWidth - 32);
+
   this.forecastItems = numberOfForecasts > 0 ? numberOfForecasts : Math.round(card.offsetWidth / (fontSize * 6));
   this.drawChart();
 }
@@ -635,7 +639,18 @@ drawChart({ config, language, weather, forecastItems } = this) {
       borderColor: config.forecast.precipitation_color,
       backgroundColor: config.forecast.precipitation_color,
       barPercentage: config.forecast.precip_bar_size / 100,
-      categoryPercentage: 0.9,
+      categoryPercentage: 1.0,
+      maxBarThickness: (() => {
+        // Use stored container width (set in measureCard where layout is guaranteed)
+        // to compute identical pixel widths for all bars.
+        const w = this.chartContainerWidth || 0;
+        const n = data.dateTime.length || 1;
+        if (w > 0) {
+          return Math.max(2, Math.floor((w / n) * (config.forecast.precip_bar_size / 100)));
+        }
+        return undefined;
+      })(),
+      minBarLength: 0,
       datalabels: {
         display: function (context) {
           return context.dataset.data[context.dataIndex] > 0 ? 'true' : false;
