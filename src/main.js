@@ -1111,16 +1111,17 @@ updateChart({ forecasts, forecastChart } = this) {
           font-weight: 400;
         }
         .main .current-condition {
-          margin-top: 5px;
+          font-size: ${config.condition_text_size}px;
+          margin-top: 1px;
         }
         .main .current-temperature {
           line-height: 0.8;
           margin-bottom: 2px;
         }
         .main .description {
-	  font-style: italic;
+          font-style: italic;
           font-size: ${config.description_text_size}px;
-          margin-top: 5px;
+          margin-top: 1px;
           font-weight: 400;
         }
         .updated {
