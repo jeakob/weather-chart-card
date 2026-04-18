@@ -18610,8 +18610,13 @@ set hass(hass) {
     this.custom_text = this.config.custom_text_sensor && hass.states[this.config.custom_text_sensor] ? hass.states[this.config.custom_text_sensor].state : null;
 
     let rawCloudCoverage;
+    let rawCloudCoverageForecast = null;
     if (this.config.cloud_coverage && hass.states[this.config.cloud_coverage]) {
-      rawCloudCoverage = hass.states[this.config.cloud_coverage].state;
+      const coverageState = hass.states[this.config.cloud_coverage];
+      rawCloudCoverage = coverageState.state;
+      if (coverageState.attributes && Array.isArray(coverageState.attributes.forecast)) {
+        rawCloudCoverageForecast = coverageState.attributes.forecast;
+      }
     } else if (this.weather.attributes.cloud_coverage !== undefined) {
       rawCloudCoverage = this.weather.attributes.cloud_coverage;
     }
@@ -18619,6 +18624,7 @@ set hass(hass) {
       ? parseFloat(rawCloudCoverage)
       : NaN;
     this.cloud_coverage = Number.isFinite(parsedCoverage) ? parsedCoverage : null;
+    this.cloud_coverage_forecast = rawCloudCoverageForecast;
   }
 
   if (this.weather && !this.forecastSubscriber) {
@@ -18753,16 +18759,28 @@ ll(str) {
 
   getCloudCoverageShade(coverage) {
     const c = Math.max(0, Math.min(100, coverage));
-    if (c < 25) {
-      return { fill: '#ffffff', stroke: '#2c2c2c', label: 'light' };
+    if (c < 45) {
+      return { fill: '#ffffff', stroke: '#404040', strokeWidth: 1.0, label: 'light' };
     }
-    if (c < 50) {
-      return { fill: '#d6d6d6', stroke: '#2c2c2c', label: 'medium-light' };
+    if (c < 65) {
+      return { fill: '#e0e0e0', stroke: '#3a3a3a', strokeWidth: 1.2, label: 'medium-light' };
     }
-    if (c < 75) {
-      return { fill: '#8a8a8a', stroke: '#1a1a1a', label: 'medium-heavy' };
+    if (c < 85) {
+      return { fill: '#8e8e8e', stroke: '#262626', strokeWidth: 1.4, label: 'medium-heavy' };
     }
-    return { fill: '#3f3f3f', stroke: '#1a1a1a', label: 'heavy' };
+    return { fill: '#3f3f3f', stroke: '#1a1a1a', strokeWidth: 1.5, label: 'heavy' };
+  }
+
+  getCoverageForForecastItem(item, index) {
+    if (item && item.cloud_coverage !== undefined && item.cloud_coverage !== null) {
+      const n = parseFloat(item.cloud_coverage);
+      if (Number.isFinite(n)) return n;
+    }
+    const arr = this.cloud_coverage_forecast;
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    if (typeof index !== 'number' || index < 0 || index >= arr.length) return null;
+    const n = parseFloat(arr[index]);
+    return Number.isFinite(n) ? n : null;
   }
 
   renderCloudCoverageIcon(condition, coverage) {
@@ -18772,19 +18790,19 @@ ll(str) {
     if (condition !== 'cloudy' && condition !== 'partlycloudy') {
       return null;
     }
-    const { fill, stroke, label } = this.getCloudCoverageShade(coverage);
+    const { fill, stroke, strokeWidth, label } = this.getCloudCoverageShade(coverage);
     const cloudPath = 'M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z';
     if (condition === 'partlycloudy') {
       return x`
         <svg class="cloud-coverage-icon" data-shade="${label}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cloud coverage ${Math.round(coverage)}%">
           <circle cx="24" cy="22" r="9" fill="#f9d71c" stroke="#d49a0a" stroke-width="1.2"></circle>
-          <path d="${cloudPath}" transform="translate(0 6)" fill="${fill}" stroke="${stroke}" stroke-width="1.5" stroke-miterlimit="10"></path>
+          <path d="${cloudPath}" transform="translate(0 6)" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-miterlimit="10"></path>
         </svg>
       `;
     }
     return x`
       <svg class="cloud-coverage-icon" data-shade="${label}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cloud coverage ${Math.round(coverage)}%">
-        <path d="${cloudPath}" fill="${fill}" stroke="${stroke}" stroke-width="1.5" stroke-miterlimit="10"></path>
+        <path d="${cloudPath}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-miterlimit="10"></path>
       </svg>
     `;
   }
@@ -19506,6 +19524,14 @@ updateChart({ forecasts, forecastChart } = this) {
         .forecast-item ha-icon {
           --mdc-icon-size: ${config.forecast.condition_icon_size}px;
         }
+        .forecast-item .cloud-coverage-icon {
+          width: ${config.forecast.condition_icon_size}px;
+          height: ${config.forecast.condition_icon_size}px;
+        }
+        .daily-summary-item .cloud-coverage-icon {
+          width: ${config.daily_summary_icon_size}px;
+          height: ${config.daily_summary_icon_size}px;
+        }
         .wind-details {
           display: flex;
           justify-content: space-around;
@@ -19996,7 +20022,7 @@ renderForecastConditionIcons({ config, forecastItems, sun } = this) {
 
   return x`
     <div class="conditions" @click="${(e) => this.showMoreInfo(config.entity)}">
-      ${forecast.map((item) => {
+      ${forecast.map((item, index) => {
         const forecastTime = new Date(item.datetime);
         const sunriseTime = new Date(sun.attributes.next_rising);
         const sunsetTime = new Date(sun.attributes.next_setting);
@@ -20026,8 +20052,12 @@ renderForecastConditionIcons({ config, forecastItems, sun } = this) {
         const condition = item.condition;
 
         let iconHtml;
+        const itemCoverage = this.getCoverageForForecastItem(item, index);
+        const coverageIcon = this.renderCloudCoverageIcon(condition, itemCoverage);
 
-        if (config.animated_icons || config.icons) {
+        if (coverageIcon) {
+          iconHtml = coverageIcon;
+        } else if (config.animated_icons || config.icons) {
           const iconSrc = config.animated_icons ?
             `${this.baseIconPath}${weatherIcons[condition]}.svg` :
             `${this.config.icons}${weatherIcons[condition]}.svg`;
@@ -20146,7 +20176,11 @@ renderDailySummary({ config, sun } = this) {
     this.ll('units')[this.unitSpeed];
 
     let iconHtml;
-    if (config.animated_icons || config.icons) {
+    const summaryCoverage = this.getCoverageForForecastItem(forecast);
+    const summaryCoverageIcon = this.renderCloudCoverageIcon(condition, summaryCoverage);
+    if (summaryCoverageIcon) {
+      iconHtml = summaryCoverageIcon;
+    } else if (config.animated_icons || config.icons) {
       const icons = weatherIconsDay;
       const iconSrc = config.animated_icons ?
         `${this.baseIconPath}${icons[condition]}.svg` :

@@ -32,7 +32,7 @@ HACS is a third party community store and is not included in Home Assistant out 
 | dew_point             | string  | none                     | An entity_id for a custom dew point sensor.                                                        |
 | wind_gust_speed       | string  | none                     | An entity_id for a custom wind gust speed sensor.                                                  |
 | visibility            | string  | none                     | An entity_id for a custom visibility sensor.                                                       |
-| cloud_coverage        | string  | none                     | An entity_id for a cloud coverage sensor (%). Dynamically shades the cloudy/partly-cloudy main icon from white (outlined) to dark based on coverage. Falls back to the weather entity's `cloud_coverage` attribute if set. Safe to omit. |
+| cloud_coverage        | string  | none                     | An entity_id for a cloud coverage sensor (%). Shades the cloudy/partly-cloudy icons from white (outlined) to dark based on coverage. If the sensor exposes a `forecast` attribute (array of hourly values), the chart's forecast icons and daily-summary icons are shaded index-by-index too. Falls back to the weather entity's `cloud_coverage` attribute and to per-forecast-item `cloud_coverage` values when available. Safe to omit. |
 | description           | string  | none                     | An entity_id for a custom weather description sensor.                                              |
 | title                 | string  | none                     | Card title.                                                                                        |
 | show_main             | boolean | true                     | Show or hide a section with current weather condition and temperature.                             |
@@ -154,6 +154,44 @@ units:
   speed: m/s
 ```
 
+###### Cloud coverage shading
+Feed the card a cloud-coverage sensor that exposes the **current** value as its state and an **hourly forecast** array as the `forecast` attribute. Per-hour values drive the colour of each forecast column icon (and the daily-summary icons when the chart is in hourly mode). The main icon uses the sensor's state.
+
+Template sensor example (uses the `weather.get_forecasts` action to pull an hourly array from the weather entity):
+```yaml
+template:
+  - trigger:
+      - platform: time_pattern
+        minutes: /15
+      - platform: homeassistant
+        event: start
+    action:
+      - action: weather.get_forecasts
+        data:
+          type: hourly
+        target:
+          entity_id: weather.home
+        response_variable: hourly
+    sensor:
+      - name: Cloud Coverage Hourly
+        unique_id: cloud_coverage_hourly
+        state: "{{ state_attr('weather.home', 'cloud_coverage') | float(0) }}"
+        unit_of_measurement: "%"
+        attributes:
+          forecast: "{{ hourly['weather.home'].forecast | map(attribute='cloud_coverage') | list }}"
+```
+
+Then point the card at it via the **Alternate entities** tab (or in YAML):
+```yaml
+type: custom:eink-weather-card
+entity: weather.home
+cloud_coverage: sensor.cloud_coverage_hourly
+forecast:
+  type: hourly
+```
+
+Shade bands (0–100%): `<45` white with thin outline, `45–65` light grey, `65–85` medium grey, `≥85` dark grey. If the sensor is missing or produces non-numeric values, shading is skipped and the default icons render unchanged.
+
 ###### Supported languages:
 | Language         | Locale  |
 | ---------------- | ------- |
@@ -202,6 +240,10 @@ forecast:
 ```
 
 ## Changelog
+
+### v1.3.4
+- Cloud coverage shading now applies to forecast condition icons and daily-summary icons, not just the main icon. If the coverage sensor's `forecast` attribute holds an hourly array, each forecast column is shaded from its matching hour. Per-forecast-item `cloud_coverage` values (if provided by the weather integration) are also honoured.
+- Rebalanced shade thresholds so mid-range coverage no longer renders too dark. The white/outlined band now extends to ~45%; full "heavy" shading kicks in from 85%.
 
 ### v1.3.3
 - Added `cloud_coverage` alternate entity. When the current condition is cloudy or partly cloudy, the main icon is rendered as an inline SVG whose shade (white with outline → light → medium → dark grey) is derived from the coverage percentage. Falls back gracefully when no sensor or attribute is available.
