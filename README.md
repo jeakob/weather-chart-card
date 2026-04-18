@@ -241,6 +241,9 @@ forecast:
 
 ## Changelog
 
+### v1.3.5
+- Restored the rayed sun behind the partly-cloudy icon (previously rendered as a plain disc when cloud-coverage shading was active). The cloud in front still shades based on coverage.
+
 ### v1.3.4
 - Cloud coverage shading now applies to forecast condition icons and daily-summary icons, not just the main icon. If the coverage sensor's `forecast` attribute holds an hourly array, each forecast column is shaded from its matching hour. Per-forecast-item `cloud_coverage` values (if provided by the weather integration) are also honoured.
 - Rebalanced shade thresholds so mid-range coverage no longer renders too dark. The white/outlined band now extends to ~45%; full "heavy" shading kicks in from 85%.

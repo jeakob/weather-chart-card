@@ -422,8 +422,11 @@ ll(str) {
     if (condition === 'partlycloudy') {
       return html`
         <svg class="cloud-coverage-icon" data-shade="${label}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cloud coverage ${Math.round(coverage)}%">
-          <circle cx="24" cy="22" r="9" fill="#f9d71c" stroke="#d49a0a" stroke-width="1.2"></circle>
-          <path d="${cloudPath}" transform="translate(0 6)" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-miterlimit="10"></path>
+          <g stroke="#f8af18" stroke-linecap="round" stroke-miterlimit="10">
+            <circle cx="19" cy="24" r="5" fill="#fbbf24" stroke-width="0.5"></circle>
+            <path fill="none" stroke="#fbbf24" stroke-width="2" d="M19 15.67V12.5m0 23v-3.17m5.89-14.22l2.24-2.24M10.87 32.13l2.24-2.24m0-11.78l-2.24-2.24m16.26 16.26l-2.24-2.24M7.5 24h3.17m19.83 0h-3.17"></path>
+          </g>
+          <path d="${cloudPath}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-miterlimit="10"></path>
         </svg>
       `;
     }
