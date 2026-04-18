@@ -1,11 +1,14 @@
-<h1 align="center">E-Ink Weather Card</h1>
+<h1 align="center">
+  <img src="docs/icon.png" alt="E-Ink Weather Card" width="96" /><br />
+  E-Ink Weather Card
+</h1>
 
 > A Home Assistant weather card optimised for e-ink displays, based on [mlamberts78/weather-chart-card](https://github.com/mlamberts78/weather-chart-card). Features configurable font sizes, e-ink colour modes, daily summaries, and full translation support.
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/jeakob/E-Ink-Weather-Card?style=flat-square)](https://github.com/jeakob/E-Ink-Weather-Card/releases/latest)
 
-![eink-weather-card](docs/eink-weather-card.png)
+![eink-weather-card](docs/eink-weather-card.jpg)
 
 ## Installation
 
@@ -238,36 +241,3 @@ forecast:
   chart_line_width: 3
   chart_point_radius: 4
 ```
-
-## Changelog
-
-### v1.3.6
-- Repositioned and enlarged the sun on the partly-cloudy coverage icon so it (and its rays) is clearly visible peeking from behind the cloud.
-
-### v1.3.5
-- Restored the rayed sun behind the partly-cloudy icon (previously rendered as a plain disc when cloud-coverage shading was active). The cloud in front still shades based on coverage.
-
-### v1.3.4
-- Cloud coverage shading now applies to forecast condition icons and daily-summary icons, not just the main icon. If the coverage sensor's `forecast` attribute holds an hourly array, each forecast column is shaded from its matching hour. Per-forecast-item `cloud_coverage` values (if provided by the weather integration) are also honoured.
-- Rebalanced shade thresholds so mid-range coverage no longer renders too dark. The white/outlined band now extends to ~45%; full "heavy" shading kicks in from 85%.
-
-### v1.3.3
-- Added `cloud_coverage` alternate entity. When the current condition is cloudy or partly cloudy, the main icon is rendered as an inline SVG whose shade (white with outline → light → medium → dark grey) is derived from the coverage percentage. Falls back gracefully when no sensor or attribute is available.
-
-### v1.0.6
-- Added optional text labels for attribute icons (humidity, pressure, wind, etc.) with translations for all 23 supported languages
-- New `show_attribute_labels` toggle in the Card tab
-
-### v1.0.5
-- Added configurable attribute icon size (`attributes_icon_size`)
-
-### v1.0.4
-- Added configurable font sizes for condition text, feels-like, description, and attributes
-- Added configurable chart line width and point radius
-- Added configurable forecast condition icon size
-
-### v1.0.3
-- Added E-ink display mode (`eink_mode`) with high contrast, bold fonts, thicker chart lines, and auto-disabled animations
-- Fixed chart date label ("10 KWI") being cut off — added dynamic top padding
-- Fixed weather icon not scaling with `icons_size` setting
-- Added dynamic chart expansion when precipitation is present (`precip_expand_height`)
