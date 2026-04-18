@@ -211,6 +211,8 @@ class EinkWeatherCardEditor extends LitElement {
           padding-left: 14px;
         }
         .switch-container {
+          display: flex;
+          align-items: center;
           margin-bottom: 12px;
         }
         .page-container {

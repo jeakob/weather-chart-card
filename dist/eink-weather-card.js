@@ -1342,6 +1342,8 @@ class EinkWeatherCardEditor extends s {
           padding-left: 14px;
         }
         .switch-container {
+          display: flex;
+          align-items: center;
           margin-bottom: 12px;
         }
         .page-container {
