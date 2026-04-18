@@ -241,6 +241,9 @@ forecast:
 
 ## Changelog
 
+### v1.3.6
+- Repositioned and enlarged the sun on the partly-cloudy coverage icon so it (and its rays) is clearly visible peeking from behind the cloud.
+
 ### v1.3.5
 - Restored the rayed sun behind the partly-cloudy icon (previously rendered as a plain disc when cloud-coverage shading was active). The cloud in front still shades based on coverage.
 
