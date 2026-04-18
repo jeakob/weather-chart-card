@@ -284,20 +284,46 @@ class EinkWeatherCardEditor extends LitElement {
           flex-basis: 50%;
           flex-grow: 1;
         }
+        .select-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          margin-bottom: 8px;
+        }
+        .select-wrapper label {
+          font-size: 12px;
+          color: var(--secondary-text-color, #757575);
+        }
+        select.native-select {
+          padding: 8px 12px;
+          border: 1px solid var(--divider-color, #e0e0e0);
+          border-radius: 4px;
+          background: var(--card-background-color, var(--primary-background-color, #fff));
+          color: var(--primary-text-color, #000);
+          font-family: inherit;
+          font-size: 14px;
+          width: 100%;
+          min-height: 40px;
+          box-sizing: border-box;
+          cursor: pointer;
+        }
+        select.native-select:focus {
+          outline: none;
+          border-color: var(--primary-color, #03a9f4);
+        }
       </style>
       <div>
       <div class="textfield-container">
-<ha-select
-  naturalMenuWidth
-  fixedMenuPosition
-  label="Entity"
-  .configValue=${'entity'}
-  .value=${this._entity}
-  @change=${(e) => this._EntityChanged(e, 'entity')}
-  @closed=${(ev) => ev.stopPropagation()}
->
-  ${this.entities.map((entity) => html`<ha-list-item .value=${entity}>${entity}</ha-list-item>`)}
-</ha-select>
+<div class="select-wrapper">
+  <label>Entity</label>
+  <select
+    class="native-select"
+    .value=${this._entity || ''}
+    @change=${(e) => this._EntityChanged(e, 'entity')}
+  >
+    ${this.entities.map((entity) => html`<option value=${entity} ?selected=${entity === this._entity}>${entity}</option>`)}
+  </select>
+</div>
       <ha-textfield
         label="Title"
         .value="${this._config.title || ''}"
@@ -681,40 +707,40 @@ class EinkWeatherCardEditor extends LitElement {
           .value="${this._config.icons || ''}"
           @change="${(e) => this._valueChanged(e, 'icons')}"
         ></ha-textfield>
-         <ha-select
-           naturalMenuWidth
-           fixedMenuPosition
-           label="Select custom language"
-           .configValue=${''}
-           .value=${this._config.locale}
-           @change=${(e) => this._valueChanged(e, 'locale')}
-           @closed=${(ev) => ev.stopPropagation()}
-         >
-           <ha-list-item .value=${''}>HA Default</ha-list-item>
-           <ha-list-item .value=${'bg'}>Bulgarian</ha-list-item>
-           <ha-list-item .value=${'ca'}>Catalan</ha-list-item>
-           <ha-list-item .value=${'cs'}>Czech</ha-list-item>
-           <ha-list-item .value=${'da'}>Danish</ha-list-item>
-           <ha-list-item .value=${'nl'}>Dutch</ha-list-item>
-           <ha-list-item .value=${'en'}>English</ha-list-item>
-           <ha-list-item .value=${'fi'}>Finnish</ha-list-item>
-           <ha-list-item .value=${'fr'}>French</ha-list-item>
-           <ha-list-item .value=${'de'}>German</ha-list-item>
-           <ha-list-item .value=${'el'}>Greek</ha-list-item>
-           <ha-list-item .value=${'hu'}>Hungarian</ha-list-item>
-           <ha-list-item .value=${'it'}>Italian</ha-list-item>
-           <ha-list-item .value=${'lt'}>Lithuanian</ha-list-item>
-           <ha-list-item .value=${'no'}>Norwegian</ha-list-item>
-           <ha-list-item .value=${'pl'}>Polish</ha-list-item>
-           <ha-list-item .value=${'pt'}>Portuguese</ha-list-item>
-           <ha-list-item .value=${'ro'}>Romanian</ha-list-item>
-           <ha-list-item .value=${'ru'}>Russian</ha-list-item>
-           <ha-list-item .value=${'sk'}>Slovak</ha-list-item>
-           <ha-list-item .value=${'es'}>Spanish</ha-list-item>
-           <ha-list-item .value=${'sv'}>Swedish</ha-list-item>
-	   <ha-list-item .value=${'uk'}>Ukrainian</ha-list-item>
-    	   <ha-list-item .value=${'ko'}>한국어</ha-list-item>
-        </ha-select>
+         <div class="select-wrapper">
+           <label>Select custom language</label>
+           <select
+             class="native-select"
+             @change=${(e) => this._valueChanged(e, 'locale')}
+           >
+             ${[
+               { value: '', label: 'HA Default' },
+               { value: 'bg', label: 'Bulgarian' },
+               { value: 'ca', label: 'Catalan' },
+               { value: 'cs', label: 'Czech' },
+               { value: 'da', label: 'Danish' },
+               { value: 'nl', label: 'Dutch' },
+               { value: 'en', label: 'English' },
+               { value: 'fi', label: 'Finnish' },
+               { value: 'fr', label: 'French' },
+               { value: 'de', label: 'German' },
+               { value: 'el', label: 'Greek' },
+               { value: 'hu', label: 'Hungarian' },
+               { value: 'it', label: 'Italian' },
+               { value: 'lt', label: 'Lithuanian' },
+               { value: 'no', label: 'Norwegian' },
+               { value: 'pl', label: 'Polish' },
+               { value: 'pt', label: 'Portuguese' },
+               { value: 'ro', label: 'Romanian' },
+               { value: 'ru', label: 'Russian' },
+               { value: 'sk', label: 'Slovak' },
+               { value: 'es', label: 'Spanish' },
+               { value: 'sv', label: 'Swedish' },
+               { value: 'uk', label: 'Ukrainian' },
+               { value: 'ko', label: '한국어' },
+             ].map((o) => html`<option value=${o.value} ?selected=${(this._config.locale || '') === o.value}>${o.label}</option>`)}
+           </select>
+         </div>
         </div>
         <div class="switch-container">
           <ha-switch
@@ -816,18 +842,16 @@ class EinkWeatherCardEditor extends LitElement {
             </label>
           </div>
 	  <div class="textfield-container">
-          <ha-select
-            naturalMenuWidth
-            fixedMenuPosition
-            label="Precipitation Type (Probability if supported by the weather entity)"
-            .configValue=${'forecast.precipitation_type'}
-            .value=${forecastConfig.precipitation_type}
-            @change=${(e) => this._valueChanged(e, 'forecast.precipitation_type')}
-            @closed=${(ev) => ev.stopPropagation()}
-          >
-            <ha-list-item .value=${'rainfall'}>Rainfall</ha-list-item>
-            <ha-list-item .value=${'probability'}>Probability</ha-list-item>
-          </ha-select>
+          <div class="select-wrapper">
+            <label>Precipitation Type (Probability if supported by the weather entity)</label>
+            <select
+              class="native-select"
+              @change=${(e) => this._valueChanged(e, 'forecast.precipitation_type')}
+            >
+              <option value="rainfall" ?selected=${forecastConfig.precipitation_type === 'rainfall'}>Rainfall</option>
+              <option value="probability" ?selected=${forecastConfig.precipitation_type === 'probability'}>Probability</option>
+            </select>
+          </div>
          <div class="switch-container" ?hidden=${forecastConfig.precipitation_type !== 'rainfall'}>
              <ha-switch
                @change="${(e) => this._valueChanged(e, 'forecast.show_probability')}"
@@ -916,33 +940,29 @@ class EinkWeatherCardEditor extends LitElement {
         <!-- Units Page -->
         <div class="page-container ${this.currentPage === 'units' ? 'active' : ''}">
           <div class="textfield-container">
-            <ha-select
-              naturalMenuWidth
-              fixedMenuPosition
-              label="Convert pressure to"
-              .configValue=${'units.pressure'}
-              .value=${unitsConfig.pressure}
-              @change=${(e) => this._valueChanged(e, 'units.pressure')}
-              @closed=${(ev) => ev.stopPropagation()}
-            >
-              <ha-list-item .value=${'hPa'}>hPa</ha-list-item>
-              <ha-list-item .value=${'mmHg'}>mmHg</ha-list-item>
-              <ha-list-item .value=${'inHg'}>inHg</ha-list-item>
-            </ha-select>
-            <ha-select
-              naturalMenuWidth
-              fixedMenuPosition
-              label="Convert wind speed to"
-              .configValue=${'units.speed'}
-              .value=${unitsConfig.speed}
-              @change=${(e) => this._valueChanged(e, 'units.speed')}
-              @closed=${(ev) => ev.stopPropagation()}
-            >
-              <ha-list-item .value=${'km/h'}>km/h</ha-list-item>
-              <ha-list-item .value=${'m/s'}>m/s</ha-list-item>
-              <ha-list-item .value=${'Bft'}>Bft</ha-list-item>
-              <ha-list-item .value=${'mph'}>mph</ha-list-item>
-            </ha-select>
+            <div class="select-wrapper">
+              <label>Convert pressure to</label>
+              <select
+                class="native-select"
+                @change=${(e) => this._valueChanged(e, 'units.pressure')}
+              >
+                <option value="hPa" ?selected=${unitsConfig.pressure === 'hPa'}>hPa</option>
+                <option value="mmHg" ?selected=${unitsConfig.pressure === 'mmHg'}>mmHg</option>
+                <option value="inHg" ?selected=${unitsConfig.pressure === 'inHg'}>inHg</option>
+              </select>
+            </div>
+            <div class="select-wrapper">
+              <label>Convert wind speed to</label>
+              <select
+                class="native-select"
+                @change=${(e) => this._valueChanged(e, 'units.speed')}
+              >
+                <option value="km/h" ?selected=${unitsConfig.speed === 'km/h'}>km/h</option>
+                <option value="m/s" ?selected=${unitsConfig.speed === 'm/s'}>m/s</option>
+                <option value="Bft" ?selected=${unitsConfig.speed === 'Bft'}>Bft</option>
+                <option value="mph" ?selected=${unitsConfig.speed === 'mph'}>mph</option>
+              </select>
+            </div>
           </div>
         </div>
 
