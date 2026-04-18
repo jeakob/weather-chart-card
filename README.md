@@ -1,8 +1,10 @@
 <h1 align="center">
-  <img src="docs/eink-dashboard-logo-no-bg.png" alt="E-Ink Weather Card" width="96" /><br />
-  E-Ink Weather Card
+  <img src="docs/eink-dashboard-logo-no-bg.png" alt="E-Ink Weather Card" style="width:300px;" />
 </h1>
 
+<h1 align="center">
+E-Ink Weather Card
+</h1>
 > A Home Assistant weather card optimised for e-ink displays, based on [mlamberts78/weather-chart-card](https://github.com/mlamberts78/weather-chart-card). Features configurable font sizes, e-ink colour modes, daily summaries, and full translation support.
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
