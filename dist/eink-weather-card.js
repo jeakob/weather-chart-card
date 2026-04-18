@@ -1143,6 +1143,7 @@ const ALT_SCHEMA = [
   { name: "dew_point", title: "Alternative dew pointsensor", selector: { entity: { domain: 'sensor' } } },
   { name: "wind_gust_speed", title: "Alternative wind gust speed sensor", selector: { entity: { domain: 'sensor' } } },
   { name: "visibility", title: "Alternative visibility sensor", selector: { entity: { domain: 'sensor' } } },
+  { name: "cloud_coverage", title: "Alternative cloud coverage sensor (%)", selector: { entity: { domain: 'sensor' } } },
   { name: "custom_text_sensor", title: "Custom text sensor (displayed at top center)", selector: { entity: {} } },
 ];
 
@@ -18607,6 +18608,17 @@ set hass(hass) {
     this.feels_like = this.config.feels_like && hass.states[this.config.feels_like] ? hass.states[this.config.feels_like].state : this.weather.attributes.apparent_temperature;
     this.description = this.config.description && hass.states[this.config.description] ? hass.states[this.config.description].state : this.weather.attributes.description;
     this.custom_text = this.config.custom_text_sensor && hass.states[this.config.custom_text_sensor] ? hass.states[this.config.custom_text_sensor].state : null;
+
+    let rawCloudCoverage;
+    if (this.config.cloud_coverage && hass.states[this.config.cloud_coverage]) {
+      rawCloudCoverage = hass.states[this.config.cloud_coverage].state;
+    } else if (this.weather.attributes.cloud_coverage !== undefined) {
+      rawCloudCoverage = this.weather.attributes.cloud_coverage;
+    }
+    const parsedCoverage = rawCloudCoverage !== undefined && rawCloudCoverage !== null && rawCloudCoverage !== 'unknown' && rawCloudCoverage !== 'unavailable'
+      ? parseFloat(rawCloudCoverage)
+      : NaN;
+    this.cloud_coverage = Number.isFinite(parsedCoverage) ? parsedCoverage : null;
   }
 
   if (this.weather && !this.forecastSubscriber) {
@@ -18737,6 +18749,44 @@ ll(str) {
       return `${this.config.icons}${iconName}.svg`;
     }
     return weatherIcons[condition];
+  }
+
+  getCloudCoverageShade(coverage) {
+    const c = Math.max(0, Math.min(100, coverage));
+    if (c < 25) {
+      return { fill: '#ffffff', stroke: '#2c2c2c', label: 'light' };
+    }
+    if (c < 50) {
+      return { fill: '#d6d6d6', stroke: '#2c2c2c', label: 'medium-light' };
+    }
+    if (c < 75) {
+      return { fill: '#8a8a8a', stroke: '#1a1a1a', label: 'medium-heavy' };
+    }
+    return { fill: '#3f3f3f', stroke: '#1a1a1a', label: 'heavy' };
+  }
+
+  renderCloudCoverageIcon(condition, coverage) {
+    if (coverage === null || coverage === undefined || !Number.isFinite(coverage)) {
+      return null;
+    }
+    if (condition !== 'cloudy' && condition !== 'partlycloudy') {
+      return null;
+    }
+    const { fill, stroke, label } = this.getCloudCoverageShade(coverage);
+    const cloudPath = 'M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z';
+    if (condition === 'partlycloudy') {
+      return x`
+        <svg class="cloud-coverage-icon" data-shade="${label}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cloud coverage ${Math.round(coverage)}%">
+          <circle cx="24" cy="22" r="9" fill="#f9d71c" stroke="#d49a0a" stroke-width="1.2"></circle>
+          <path d="${cloudPath}" transform="translate(0 6)" fill="${fill}" stroke="${stroke}" stroke-width="1.5" stroke-miterlimit="10"></path>
+        </svg>
+      `;
+    }
+    return x`
+      <svg class="cloud-coverage-icon" data-shade="${label}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cloud coverage ${Math.round(coverage)}%">
+        <path d="${cloudPath}" fill="${fill}" stroke="${stroke}" stroke-width="1.5" stroke-miterlimit="10"></path>
+      </svg>
+    `;
   }
 
 getWindDirIcon(deg) {
@@ -19403,6 +19453,14 @@ updateChart({ forecasts, forecastChart } = this) {
           margin-inline-start: initial;
           margin-inline-end: 14px;
         }
+        .main .cloud-coverage-icon {
+          width: ${config.icons_size * 2}px;
+          height: ${config.icons_size * 2}px;
+          margin-right: 14px;
+          margin-inline-start: initial;
+          margin-inline-end: 14px;
+          flex-shrink: 0;
+        }
         .main div {
           line-height: 0.9;
         }
@@ -19695,9 +19753,12 @@ renderMain({ config, sun, weather, temperature, feels_like, description } = this
     roundedFeelsLike = Math.round(roundedFeelsLike * 10) / 10;
   }
 
-  const iconHtml = config.animated_icons || config.icons
-    ? x`<img src="${this.getWeatherIcon(weather.state, sun.state)}" alt="">`
-    : x`<ha-icon icon="${this.getWeatherIcon(weather.state, sun.state)}"></ha-icon>`;
+  const coverageIcon = this.renderCloudCoverageIcon(weather.state, this.cloud_coverage);
+  const iconHtml = coverageIcon
+    ? coverageIcon
+    : (config.animated_icons || config.icons
+      ? x`<img src="${this.getWeatherIcon(weather.state, sun.state)}" alt="">`
+      : x`<ha-icon icon="${this.getWeatherIcon(weather.state, sun.state)}"></ha-icon>`);
 
   const updateClock = () => {
     const currentDate = new Date();

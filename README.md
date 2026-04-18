@@ -32,6 +32,7 @@ HACS is a third party community store and is not included in Home Assistant out 
 | dew_point             | string  | none                     | An entity_id for a custom dew point sensor.                                                        |
 | wind_gust_speed       | string  | none                     | An entity_id for a custom wind gust speed sensor.                                                  |
 | visibility            | string  | none                     | An entity_id for a custom visibility sensor.                                                       |
+| cloud_coverage        | string  | none                     | An entity_id for a cloud coverage sensor (%). Dynamically shades the cloudy/partly-cloudy main icon from white (outlined) to dark based on coverage. Falls back to the weather entity's `cloud_coverage` attribute if set. Safe to omit. |
 | description           | string  | none                     | An entity_id for a custom weather description sensor.                                              |
 | title                 | string  | none                     | Card title.                                                                                        |
 | show_main             | boolean | true                     | Show or hide a section with current weather condition and temperature.                             |
@@ -201,6 +202,9 @@ forecast:
 ```
 
 ## Changelog
+
+### v1.3.3
+- Added `cloud_coverage` alternate entity. When the current condition is cloudy or partly cloudy, the main icon is rendered as an inline SVG whose shade (white with outline → light → medium → dark grey) is derived from the coverage percentage. Falls back gracefully when no sensor or attribute is available.
 
 ### v1.0.6
 - Added optional text labels for attribute icons (humidity, pressure, wind, etc.) with translations for all 23 supported languages
