@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="docs/icon.png" alt="E-Ink Weather Card" width="96" /><br />
+  <img src="docs/eink-dashboard-logo-no-bg.png" alt="E-Ink Weather Card" width="96" /><br />
   E-Ink Weather Card
 </h1>
 
